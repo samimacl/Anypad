@@ -13,7 +13,9 @@
     <script type="text/javascript">
       function initAnypad() {
         console.log('Hier muss Instanz von Editor erzeugt werden');
-        <!-- var editor = ..... -->
+        var test = new core.anypad();
+        test.initialize();
+        console.log(test.getHtmlparser().getOutput());
       }
     </script>
   </head>
@@ -29,10 +31,10 @@
     </nav>
 
     <div id="main" class="container">
-      <div class="row">
-
-      </div>
+        <iframe src="editor.html"></iframe>
     </div>
 
+  <script type="text/javascript" src="editor/htmlparser/htmlparser.js"></script>
+  <script type="text/javascript" src="editor/core/anypad.js"></script>
   </body>
 </html>
