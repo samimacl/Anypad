@@ -1,0 +1,50 @@
+<html>
+
+    <button onclick="searchTest()">search test</button>
+    <button onclick="replaceTest()">replace test</button>
+
+    <script src="test.js"></script>
+    <script>
+
+        function searchTest() {
+            var text = prompt("Enter Text");
+            var search = prompt("Enter Search String");
+            var res = searchStringInString(search, text, "ig");
+            for (cur in res)
+            {
+                document.write(res[cur].found);
+                document.write(" at index ");
+                document.write(res[cur].index);
+                document.write("<br>");
+            }
+        }
+
+        function replaceTest()
+        {
+            var text2 = prompt("Enter text for replacing");
+            var search2 = prompt("Enter search String");
+            var replace = prompt("Enter replace String");
+            
+            var result = replaceStringInString(search2, replace, text2);
+            
+            if ("replaced" in result)
+            {
+                for(x in result["replaced"])
+                {
+                    document.write(result["replaced"][x].found);
+                    document.write(" at index ");
+                    document.write(result["replaced"][x].index);
+                    document.write("<br>");
+
+                }
+            }
+            else
+            {
+                document.write("No charackters were found or changed");
+                document.write("<br>");
+            }
+
+            document.write(result["result"]);
+        }
+    </script>  
+</html>
