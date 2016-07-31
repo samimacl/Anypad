@@ -6,3 +6,4 @@ tmp
 .DS_Store
 bower_components/
 .gitignore
+/.project

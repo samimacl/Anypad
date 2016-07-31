@@ -2,7 +2,7 @@ module.exports = function (config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: './specs',
+        basePath: './',
 
 
         // frameworks to use
@@ -12,8 +12,13 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-          '*!(.spec).js',
-          '**/*.spec.js'
+          'specs/*!(.spec).js',
+          'specs/**/*.spec.js',
+          {pattern: "../src/editor/**/*.js", included: false},
+          {pattern: "../src/*.html", included: false},
+          {pattern: "../src/editor/**/*.css", included: false},
+          '../src/index.html',
+          '../src/editor/**/**/*.js'
         ],
 
 
@@ -46,7 +51,6 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
-
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
