@@ -3,7 +3,7 @@
     <button onclick="searchTest()">search test</button>
     <button onclick="replaceTest()">replace test</button>
 
-    <script src="test.js"></script>
+    <script src="regex.js"></script>
     <script>
 
         function searchTest() {
@@ -24,9 +24,9 @@
             var text2 = prompt("Enter text for replacing");
             var search2 = prompt("Enter search String");
             var replace = prompt("Enter replace String");
-            
+
             var result = replaceStringInString(search2, replace, text2);
-            
+
             if ("replaced" in result)
             {
                 for(x in result["replaced"])
@@ -46,5 +46,5 @@
 
             document.write(result["result"]);
         }
-    </script>  
+    </script>
 </html>

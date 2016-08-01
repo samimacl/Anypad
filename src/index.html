@@ -9,34 +9,28 @@
 
     <link rel="stylesheet" href="assets/lib/bootstrap.min.css">
     <link rel="stylesheet" href="editor/UI/css/style.css">
-
-    <script type="text/javascript">
-      function initAnypad() {
-        console.log('Hier muss Instanz von Editor erzeugt werden');
-        var test = new core.anypad();
-        test.initialize();
-        console.log(test.getHtmlparser().getOutput());
-      }
-    </script>
   </head>
-
-  <body onLoad="initAnypad();">
-
+  <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header pull-left">
-          <a class="logo navbar-brand" href="#">Anypad<sup>2</sup></a>
+          <a id ="click" class="logo navbar-brand" href="#">Anypad<sup>2</sup></a>
         </div>
       </div>
     </nav>
 
     <div id="main" class="container">
-        <iframe src="editor.html"></iframe>
+        <!--<iframe src="editor.html"></iframe> -->
+      <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item" src="editor.html"></iframe>
+      </div>
+        <button id="button1" type="button" class="btn btn-primary">Test event</button>
     </div>
 
-  <script type="text/javascript" src="editor/htmlparser/htmlparser.js"></script>
-  <script type="text/javascript" src="editor/core/anypad.js"></script>
-  <script type="text/javascript" src="editor/util/JSONConnector.js"></script>
-  <script type="text/javascript" src="editor/storage/userstorage.js"></script>
+    <script type="text/javascript" src="editor/eventing/eventHandler.js"></script>
+    <script type="text/javascript" src="editor/util/JSONConnector.js"></script>
+    <script type="text/javascript" src="editor/storage/userstorage.js"></script>
+    <script type="text/javascript" src="editor/htmlparser/htmlparser.js"></script>
+    <script type="text/javascript" src="editor/core/anypad.js"></script>
   </body>
 </html>
