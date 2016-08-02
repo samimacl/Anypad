@@ -12,3 +12,23 @@ and open the template in the editor.
         margin-right: 1% ;
         
 }
+
+#header{
+	margin-left: 1%;
+        margin-right: 1%; 
+}
+
+#text_header{
+	margin-left: 48.5%;
+     
+        
+}
+
+
+#logo{
+    height:60px; 
+    widht:60px;
+    position: static;
+    margin-left: 50%;
+	      
+}
