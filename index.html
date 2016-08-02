@@ -1,51 +1,58 @@
+<!DOCTYPE html>
 <html>
-<head>
-<!-- Bootstrap core CSS -->
-<link href="src/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="src/assets/lib/css.css" rel="stylesheet">  
-<script src="wysiwyg.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body onLoad="iFrameOn();">
-    
-<div class="page-header">
-    <div id="header" class="row">
-        <div class="col-md-13">
-            <a href="#" class="thumbnail">
-            <img id="logo" class="media-object" src="src/assets/lib/pic/logo.png" alt="Logo">
-            </a>
-            <h1 id="text_header">Any<small>Pad</small></h1>
-            
-        </div>         
+    <title>Anypad</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="src/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="src/assets/lib/css.css" rel="stylesheet">
+    <script type="text/javascript" src="src/editor/eventing/eventHandler.js"></script>
+    <script type="text/javascript" src="src/editor/util/JSONConnector.js"></script>
+    <script type="text/javascript" src="src/editor/storage/userstorage.js"></script>
+    <script type="text/javascript" src="src/editor/htmlparser/htmlparser.js"></script>
+    <script type="text/javascript" src="src/editor/core/anypad.js"></script>
+  </head>
+
+<body>
+
+  <div class="page-header">
+      <div id="header" class="row">
+          <div class="col-md-13">
+              <a href="#" class="thumbnail">
+                <img id="logo" class="media-object" src="src/assets/lib/pic/logo.png" alt="Logo">
+              </a>
+              <h1 id="text_header">Any<small>Pad</small></h1>
+          </div>
+      </div>
+  </div>
+
+  <div id="editor" class="panel panel-default">
+    <div class="panel-body">
+      <div id="wysiwyg_cp">
+        <button id="1" class="btn btn-default glyphicon glyphicon-bold" type="button" value="B"></button>
+        <button id="2" class="btn btn-default glyphicon glyphicon-text-color" type="button" value="U"></button>
+        <button id="3" class="btn btn-default glyphicon glyphicon-italic" type="button" value="I"></button>
+        <button id="4" class="btn btn-default glyphicon glyphicon-text-size" type="button" value="Text Size"></button>
+        <button id="5" class="btn btn-default glyphicon glyphicon-text-background" type="button" value="Text Color"></button>
+        <button id="6" class="btn btn-default glyphicon glyphicon-apple" type="button" value="HR"></button>
+        <button id="7" class="btn btn-default glyphicon glyphicon-apple" type="button" value="UL"></button>
+        <button id="8" class="btn btn-default glyphicon glyphicon-apple" type="button" value="OL"></button>
+        <button id="9" class="btn btn-default glyphicon glyphicon-apple" type="button" value="Link"></button>
+        <button id="10" class="btn btn-default glyphicon glyphicon-apple" type="button" value="UnLink"></button>
+        <button id="11" class="btn btn-default glyphicon glyphicon-apple" type="button" value="Image"></button>
+        <button id="12" class="btn btn-default glyphicon glyphicon-apple" type="button" value="Blocksatz"></button>
+        <input  id="13" type="text" class="form-control" placeholder="Search for...">
+      </div>
     </div>
-</div>
-    
-<div id="editor" class="panel panel-default">
-  <div class="panel-body">
-    <div id="wysiwyg_cp">
-            <button class="btn btn-default glyphicon glyphicon-bold" type="button" onClick="iBold()" value="B"></button>    
-            <button class="btn btn-default glyphicon glyphicon-text-color" type="button" onClick="iUnderline()" value="U"></button> 
-            <button class="btn btn-default glyphicon glyphicon-italic" type="button" onClick="iItalic()" value="I"></button> 
-            <button class="btn btn-default glyphicon glyphicon-text-size" type="button" onClick="iFontSize()" value="Text Size"></button>
-            <button class="btn btn-default glyphicon glyphicon-text-background" type="button" onClick="iForeColor()" value="Text Color"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iHorizontalRule()" value="HR"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iUnorderedList()" value="UL"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iOrderedList()" value="OL"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iLink()" value="Link"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iUnLink()" value="UnLink"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iImage()" value="Image"></button>
-            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iJustifyFull()" value="Blocksatz"></button>
-            <input  type="text" class="form-control" placeholder="Search for...">
+
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="well well-lg" name="richTextField" id="richTextField" ></iframe>
     </div>
   </div>
-  <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="well well-lg" name="richTextField" id="richTextField" ></iframe>
-  </div>
-</div>    
 
-
-</p>
-<br /><br /><input name="myBtn" type="button" value="Submit Data" onClick="javascript:submit_form();"/>
-</form>
 </body>
 </html>

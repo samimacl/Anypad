@@ -1,9 +1,10 @@
 var core = core || {};
 
 ( function () {
-    core.anypad = core.anypad || new function () {
+    core.anypad = core.anypad || function ( editor ) {
     var self = this;
     var version = "0.0.1";
+    var richTextField = editor;
     var htmlparser = new core.htmlparser();
     var userstorage = new util.userstorage();
 
@@ -19,12 +20,32 @@ var core = core || {};
       return userstorage;
     };
 
-    function _initialize () {
-      htmlparser.initialize();
+    this.initialize = function () {
+      htmlparser.initialize( richTextField );
     };
 
-    this.initialize = function () {
-      _initialize();
+    this.iFontSize = function ( command, id, size ) {
+      htmlparser.buildCommand( command, false, size );
+    };
+
+    this.iForeColor = function (command, id, color){
+    	htmlparser.buildCommand(command, false, color);
+    };
+
+    this.iLink = function (command, id, link){
+    	htmlparser.buildCommand(command, false, link);
+    };
+
+    this.iImage = function (command, id, imageSrc){
+      htmlparser.buildCommand(command, false, imageSrc);
+    };
+
+    this.simpleCommand = function (command, id) {
+      htmlparser.buildCommand(command, false, null);
+    };
+
+    this.writeHTML = function ( html ) {
+      htmlparser.write( html );
     };
 
     self.initialize();

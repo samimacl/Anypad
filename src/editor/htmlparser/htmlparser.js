@@ -2,25 +2,37 @@ var core = core || {};
 
 core.htmlparser = core.htmlparser || function () {
   var self = this;
-  var output = [];
+  var output;
+  var richTextField;
 
   this.getOutput = function () {
     return output;
   };
 
   var reset = function () {
-    output = [];
+    output = "";
   };
 
-  function _initialize () {
+  this.initialize = function ( editor ) {
     reset();
-    createParagraph(false);
+    richTextField = editor;
   };
 
-  this.initialize = function () {
-    _initialize();
+  this.write = function (text) {
+    output = text;
+    console.log(output);
   };
 
+  this.getHTML = function () {
+    return output;
+  };
+
+  this.buildCommand = function (command, showDefaultUI, valueArgument) {
+    richTextField.contentWindow.document.execCommand(command, showDefaultUI, valueArgument);
+    self.write(richTextField.contentWindow.document.body.innerHTML);
+  };
+
+/*
   function openTag(tagname) {
     output.push('<', tagname);
   };
@@ -52,13 +64,5 @@ core.htmlparser = core.htmlparser || function () {
   function createLineBreak() {
     openTag("br");
   };
-
-  function text (text) {
-    output.push(text);
-  };
-
-  this.write = function (text) {
-    text(text);
-  };
-
+*/
 };
