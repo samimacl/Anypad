@@ -20,15 +20,16 @@ and open the template in the editor.
 
 #text_header{
 	margin-left: 48.5%;
-     
-        
 }
-
 
 #logo{
     height:60px; 
     widht:60px;
     position: static;
-    margin-left: 50%;
-	      
+    margin-left: 50%;	      
+}
+
+#editor{
+	margin-left: 2%;
+        margin-right: 2%;
 }
