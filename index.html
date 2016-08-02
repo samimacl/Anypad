@@ -1,25 +1,35 @@
 <html>
 <head>
+<!-- Bootstrap core CSS -->
+<link href="src/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="src/assets/lib/css.css" rel="stylesheet">  
 <script src="wysiwyg.js"></script>
 </head>
 <body onLoad="iFrameOn();">
-<div id="wysiwyg_cp" style="padding:8px; width:700px;">
-  <input type="button" onClick="iBold()" value="B">
-  <input type="button" onClick="iUnderline()" value="U">
-  <input type="button" onClick="iItalic()" value="I">
-  <input type="button" onClick="iFontSize()" value="Text Size">
-  <input type="button" onClick="iForeColor()" value="Text Color">
-  <input type="button" onClick="iHorizontalRule()" value="HR">
-  <input type="button" onClick="iUnorderedList()" value="UL">
-  <input type="button" onClick="iOrderedList()" value="OL">
-  <input type="button" onClick="iLink()" value="Link">
-  <input type="button" onClick="iUnLink()" value="UnLink">
-  <input type="button" onClick="iImage()" value="Image">
-  <input type="button" onClick="iJustifyFull()" value="Blocksatz">
-</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div id="wysiwyg_cp">
+            <button class="btn btn-default glyphicon glyphicon-bold" type="button" onClick="iBold()" value="B"></button>    
+            <button class="btn btn-default glyphicon glyphicon-text-color" type="button" onClick="iUnderline()" value="U"></button> 
+            <button class="btn btn-default glyphicon glyphicon-italic" type="button" onClick="iItalic()" value="I"></button> 
+            <button class="btn btn-default glyphicon glyphicon-text-size" type="button" onClick="iFontSize()" value="Text Size"></button>
+            <button class="btn btn-default glyphicon glyphicon-text-background" type="button" onClick="iForeColor()" value="Text Color"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iHorizontalRule()" value="HR"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iUnorderedList()" value="UL"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iOrderedList()" value="OL"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iLink()" value="Link"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iUnLink()" value="UnLink"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iImage()" value="Image"></button>
+            <button class="btn btn-default glyphicon glyphicon-apple" type="button" onClick="iJustifyFull()" value="Blocksatz"></button>
+      
+    </div>
+  </div>
+  <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="well well-lg" name="richTextField" id="richTextField" ></iframe>
+  </div>
+</div>    
 
-<iframe name="richTextField" id="richTextField" style="border:#000000 1px solid; width:700px; height:300px;"></iframe>
-<!-- End replacing your normal textarea -->
+
 </p>
 <br /><br /><input name="myBtn" type="button" value="Submit Data" onClick="javascript:submit_form();"/>
 </form>
