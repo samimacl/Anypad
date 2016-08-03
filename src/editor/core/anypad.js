@@ -44,8 +44,12 @@ var core = core || {};
       htmlparser.buildCommand(command, false, null);
     };
 
-    this.writeHTML = function ( html ) {
-      htmlparser.write( html );
+    this.writeHTML = function ( html, lineBreak ) {
+      htmlparser.writeHTML( html, lineBreak );
+    };
+
+    this.writeDefault = function () {
+      htmlparser.writeHTMLDefault();
     };
 
     self.initialize();

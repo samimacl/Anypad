@@ -23,8 +23,25 @@ core.htmlparser = core.htmlparser || function () {
     console.log(output);
   };
 
+  this.writeHTML = function ( html, lineBreak ) {
+     if (lineBreak) {
+       createLineBreak();
+    } else {
+      self.write( html );
+    }
+  };
+
   this.getHTML = function () {
     return output;
+  };
+
+  this.writeHTMLDefault = function () {
+    self.writeHTML( self.getHTMLDefault(), false );
+    richTextField.contentWindow.document.body.innerHTML = output;
+  };
+
+  this.getHTMLDefault = function () {
+    return "<div><br></div>";
   };
 
   this.buildCommand = function (command, showDefaultUI, valueArgument) {
@@ -32,37 +49,24 @@ core.htmlparser = core.htmlparser || function () {
     self.write(richTextField.contentWindow.document.body.innerHTML);
   };
 
-/*
-  function openTag(tagname) {
-    output.push('<', tagname);
+  var createLineBreak = function () {
+    var tag = openTag("br") + openTagClose(false) + "\u200C";
+    self.buildCommand("insertHTML", false, tag);
   };
 
-  function openTagClose(isSelfClosing) {
-    if (isSelfClosing) {
-      output.push(' />');
+  var openTag = function(tagname) {
+    return '<' + tagname;
+  };
+
+  var openTagClose = function(isSelfClosing) {
+     if (isSelfClosing) {
+      return ' />';
     } else {
-      output.push('>')
+      return '>';
     }
   };
 
-  function closeTag(tagname) {
-    output.push('</', tagname, '>');
+  var closeTag = function(tagname) {
+    return '</' + tagname + '>';
   };
-
-  function attribute (attrname, attrvalue) {
-    output.push(' ', atttrname, '="', attrvalue, '"');
-  };
-
-  function createParagraph (lineBreak) {
-    if (lineBreak) {
-      createLineBreak();
-    }
-    openTag("p");
-    closeTag("p", false);
-  };
-
-  function createLineBreak() {
-    openTag("br");
-  };
-*/
 };

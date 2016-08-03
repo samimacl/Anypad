@@ -22,7 +22,17 @@ var core = core || {};
       };
 
       var initEvents = function () {
-        richTextField.contentWindow.document.addEventListener('keyup', richTextFieldOnKeyUp, false);
+        richTextField.contentWindow.document.addEventListener('keyup', function(event) {
+          var html = richTextField.contentWindow.document.body.innerHTML;
+          if ( event.keyCode == 8 && html == anypad.getHtmlparser().getHTMLDefault() || (html == '') || (html == '<br>')) {
+            anypad.writeDefault();
+          } else {
+            /* LineBreak */
+            var createLineBreak = (event.keyCode == 13 && !event.shiftKey == 1);
+            anypad.writeHTML( html, createLineBreak );
+          }
+        }, false);
+
         var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('*'), 0);
         var elemnts = new Array(children.length);
         for (var i = 0; i < children.length; i++) {
