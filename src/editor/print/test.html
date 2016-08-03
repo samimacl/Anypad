@@ -29,38 +29,39 @@
           </div>
 
           <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon"> Anzahl Seiten :</span>
+              <input type="text" class="form-control"></input>
+            </div>
 
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Printer
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Printer 1 </a></li>
-                    <li><a href="#">Printer 2</a></li>
-                    <li><a href="#">Printer 3</a></li>
-                  </ul>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Printer
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  // Aus Print.js die Einträge ziehen 
+                  <li><a href="#">Printer 1 </a></li>
+                  <li><a href="#">Printer 2</a></li>
+                </ul>
+                <div class="btn-group" role="group" style="padding-left:10px;">
+                    <button class="btn btn-default" type="button">
+                      <span class="glyphicon glyphicon-cog"></span> Eigenschaften
+                    </button>
                 </div>
-
-              <div class="Items">
-                  <button class="btn btn-primary" type="button" data-toggle="dropdown"> Eigenschaften</button>
-              </div>
-
+            </div>
           </div>
 
           <div class="modal-footer">
-
-          <a href="#" class="btn btn-success btn-lg"  onclick="window.print();">
-            <span class="glyphicon glyphicon-print"></span> Print
-          </a>
-
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success btn-lg"  onclick="window.print();" style="padding-left:10px;">
+                <span class="glyphicon glyphicon-print"></span> Print
+              </button>
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
 
-  </div>
 
   </body>
   </html>
