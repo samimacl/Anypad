@@ -2,23 +2,37 @@
 // die datei in der die zeilen gespeichert werden.
 var datei = null;
 
+
+//wird nicht verwendet
+function downloadDialog(){
+
+	var url = 'http://localhost/test.rtf';
+	var url = dataStr;
+	window.open(url, 'Download');
+	
+}
+
 // soll inhalte aus html als .json file sichern. Tut dies inklusive Tags. 
 // Die resultierende Datei hat die Dateieindung .json und enthält ein json-Objekt 
 // mit dem name-value-pair "content":"inhalt der seite".
 function exportJSON () {
 	 
 	 datei = document.getElementById("text").innerHTML;
-	 //neu:
-	 var dataStr = "data:text/json;charset=utf-8," + 
-	 "data = [{\"content\"" + ": " + "\"" + datei + "\"}];";//encodeURIComponent(JSON.stringify(data));
+
+//hatte das potenzial sinn zu machen, machte aber keinen:
+//var dataStr = "data:text/json;charset=utf-8," + 
+//	 "data = [{\"content\"" + ": " + "\"" + datei + "\"}];";
+
+	var dataStr ="data:text/json;charset=utf-8," + datei;
 
 	 //download der datei
-	 var dlAnchorElem = document.getElementById('downloadAnchorElement');
-	 dlAnchorElem.setAttribute("href",     dataStr     );
-	 dlAnchorElem.setAttribute("download", "backup.json");
-	 dlAnchorElem.click();
+	 var save = document.getElementById('dl');
+	 save.setAttribute("href",     dataStr     );
+	 save.setAttribute("download", "backup.json");
+	 save.click();
 
 };
+
 //Eine Hilfsfunktion zum Testen, die den text einer seite löscht.
 function resetText(){
 	var leer = "";
@@ -26,30 +40,30 @@ function resetText(){
 };
 
 
-//war gedacht um die quelle des inputs zu ändern:
-/*function modifySource(){
-
-	var input = prompt("Please enter the directory where the data is stored:", "filename.json");
-	document.getElementById("quelle").setAttribute("src", input)
-}
-*/
-
 function load(){
 
-// die "quelle" people.json, bzw. "data" (ist der name der variable innerhalb von people.json)
-// ist statisch im html hinterlegt und müsste dynamisch festgelegt werden.
+	var element = document.createElement('div');
+	element.innerHTML = '<input type="file">';
+	var fileInput = element.firstChild;
 
-//var mydata = JSON.parse(data);
-//modifySource();
+	fileInput.addEventListener('change', function() {
+    var file = fileInput.files[0];
 
-var mydata = (data);
-document.getElementById("text").innerHTML = mydata[0].content;
+    if (file.name.match(/\.(txt|json)$/)) {
+        var reader = new FileReader();
+        reader.onload = function() {
 
+            var ergebnis = reader.result;
+            document.getElementById("text").innerHTML = ergebnis;
+
+        };
+        reader.readAsText(file);    
+    } else {
+        alert("File not supported, .txt or .json files only");
+    }
+});
+fileInput.click();
 };
-
-
-
-
 
 
 
