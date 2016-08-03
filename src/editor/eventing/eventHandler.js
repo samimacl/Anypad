@@ -7,7 +7,7 @@ var core = core || {};
       var self = this;
       var anypad;
       var richTextField;
-      var commands = ['bold', 'underline', 'italic', 'FontSize', 'ForeColor', 'inserthorizontalrule', 'InsertOrderedList', 'InsertUnorderedList', 'CreateLink', 'Unlink', 'insertimage', 'justifyFull'];
+      var commands = ['bold', 'underline', 'italic', 'FontSize', 'ForeColor', 'inserthorizontalrule', 'InsertOrderedList', 'InsertUnorderedList', 'CreateLink', 'Unlink', 'insertimage', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'];
 
       window.addEventListener("load", function load(event){
           window.removeEventListener("load", load, false);
@@ -33,9 +33,10 @@ var core = core || {};
           }
         }, false);
 
-        var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('*'), 0);
+        var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
         var elemnts = new Array(children.length);
-        for (var i = 0; i < children.length; i++) {
+        /* -1: Es sollen nur die ersten 14 Buttons per Schleife registriert werden */
+        for (var i = 0; i < children.length - 1; i++) {
             children[i].addEventListener('click', buttonOnClickDelegate(children[i]), false);
         }
       };
@@ -57,7 +58,6 @@ var core = core || {};
 
       function buttononClickHandler(elem) {
         var id = elem.getAttribute('id');
-        console.log(id);
         if (id == 4) {
           var size = prompt('Enter a size 1 - 7', '');
           anypad.iFontSize(commands[id-1], id, size);
@@ -74,6 +74,10 @@ var core = core || {};
             if (imgSrc != null){
               anypad.iImage(commands[id-1], id, imgSrc);
             }
+        } else if (id >= 12 || id <= 15) {
+          if (anypad.detectSelection('DIV')) {
+            anypad.simpleCommand(commands[id-1], id);
+          };
         } else {
           anypad.simpleCommand(commands[id-1], id);
         }

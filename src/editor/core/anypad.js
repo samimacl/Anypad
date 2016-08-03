@@ -7,6 +7,7 @@ var core = core || {};
     var richTextField = editor;
     var htmlparser = new core.htmlparser();
     var userstorage = new util.userstorage();
+    /* print.js instanziieren */
 
     this.getVersion = function () {
       return version;
@@ -50,6 +51,21 @@ var core = core || {};
 
     this.writeDefault = function () {
       htmlparser.writeHTMLDefault();
+    };
+
+    this.detectSelection = function( tagname ) {
+      var selection = richTextField.contentWindow.document.getSelection();
+      node = selection.anchorNode;
+
+      while (node && node.nodeName !== tagname) {
+        node = node.parentNode;
+      }
+
+      if (node) {
+        return true;
+      }
+
+      return false;
     };
 
     self.initialize();
