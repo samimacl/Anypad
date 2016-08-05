@@ -44,6 +44,12 @@ util.regex = util.regex || function () {
         return this.addTagsToString(str,open,close);
     }
 
+    this.searchAndMarkText = function(forString, inString)
+    {
+        var repl = "<b>" + inString + "</b>";
+        return this.replaceStringInString(inString, repl, forString).result;
+    }
+
   this.searchStringInString = function(searchString, inString, attributes)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, attributes)
