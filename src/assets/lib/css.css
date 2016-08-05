@@ -33,3 +33,7 @@ and open the template in the editor.
 	margin-left: 2%;
         margin-right: 2%;
 }
+
+#search{
+	float:right;
+}
