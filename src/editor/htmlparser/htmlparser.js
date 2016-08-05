@@ -20,7 +20,6 @@ core.htmlparser = core.htmlparser || function () {
 
   this.write = function (text) {
     output = text;
-    console.log(output);
   };
 
   this.writeHTML = function ( html, lineBreak ) {

@@ -51,6 +51,11 @@ var core = core || {};
         for (var i = 0; i < elements[0].length; i++) {
             elements[0][i].addEventListener('click', buttonOnClickDelegate(elements[0][i]), false);
         }
+
+        var input = document.getElementById("search").querySelector('input');
+        input.addEventListener('input', function() {
+          anypad.search(input.value.trim());
+        });
       };
 
       /**

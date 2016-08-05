@@ -84,19 +84,25 @@ var core = core || {};
       storage.importJSON();
     };
 
-    $('#searchfield').bind('input', function() {
-        var text = $(this).val().trim();
-        var innerHTML = htmlparser.getHTML();
-        var result;
+    this.updateContent = function () {
+      htmlparser.update();
+    };
 
-        if(text.length == 0){
-          result = regex.removeSpanWithAttributes(innerHTML);
-        }
-        else{
-          result = regex.searchAndMarkText(text, innerHTML);
-        }
-        self.writeHTML( result, false );
-    });
+    this.search = function (searchString) {
+      console.log(searchString.length);
+      var innerHTML = htmlparser.getHTML();
+      var result;
+
+      if(searchString.length == 0){
+        result = regex.removeSpanWithAttributes(innerHTML);
+        console.log(result);
+      }
+      else{
+        result = regex.searchAndMarkText(searchString, innerHTML);
+      }
+      self.writeHTML( result, false );
+      self.updateContent();
+    };
 
     self.initialize();
     $('#5').dropdown();
