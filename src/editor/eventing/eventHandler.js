@@ -79,6 +79,10 @@ var core = core || {};
           };
         } else if (id == "bPrint") {
           anypad.openPrintDialog();
+        } else if (id == "export") {
+          anypad.saveFile();
+        } else if (id == "import") {
+          anypad.openFile();
         }
         else {
           anypad.simpleCommand(commands[id-1], id);

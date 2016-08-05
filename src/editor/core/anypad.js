@@ -7,6 +7,7 @@ var core = core || {};
     var richTextField = editor;
     var htmlparser = new core.htmlparser();
     var userstorage = new util.userstorage();
+    var storage = new util.storage();
     var print = new util.print();
 
     this.getVersion = function () {
@@ -71,6 +72,15 @@ var core = core || {};
     this.openPrintDialog = function () {
       var innerHTML = htmlparser.getHTML();
       print.doPrint( innerHTML );
+    };
+
+    this.saveFile = function () {
+      var html = htmlparser.getHTML();
+      storage.exportJSON( html );
+    };
+
+    this.openFile = function () {
+      storage.importJSON();
     };
 
     self.initialize();

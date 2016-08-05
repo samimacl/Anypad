@@ -7,22 +7,22 @@ util.storage = util.storage || function() {
 //
 //		var url = 'http://localhost/test.rtf';
 //		var url = dataStr;
-//		window.open(url, 'Download');		
+//		window.open(url, 'Download');
 //	}
 
-	// soll inhalte aus html als .json file sichern. Tut dies inklusive Tags. 
-	// Die resultierende Datei hat die Dateieindung .json und enthält ein json-Objekt 
+	// soll inhalte aus html als .json file sichern. Tut dies inklusive Tags.
+	// Die resultierende Datei hat die Dateieindung .json und enthält ein json-Objekt
 	// mit dem name-value-pair "content":"inhalt der seite".
-	
+
 
 
 
 	this.exportJSON = function( innerHTML ) {
-		 
+
 		 var datei = innerHTML;
 
 	//hatte das potenzial sinn zu machen, machte aber keinen:
-	//var dataStr = "data:text/json;charset=utf-8," + 
+	//var dataStr = "data:text/json;charset=utf-8," +
 	//"data = [{\"content\"" + ": " + "\"" + datei + "\"}];";
 
 		var dataStr ="data:text/json;charset=utf-8," + datei;
@@ -41,7 +41,6 @@ util.storage = util.storage || function() {
 	//	document.getElementById("text").innerHTML = leer;
 	//};
 
-
 	this.importJSON = function() {
 
 		var element = document.createElement('div');
@@ -55,17 +54,15 @@ util.storage = util.storage || function() {
 	        var reader = new FileReader();
 	        reader.onload = function() {
 
-	            var ergebnis = reader.result;
-	            return ergebnis;
-
+	            var html = reader.result;
+							document.getElementById("richTextField").contentWindow.document.body.innerHTML = html;
 	        };
-	        reader.readAsText(file);    
+	        reader.readAsText(file);
 	    } else {
-	        return "<p>File not supported, .txt or .json files only</p>";
+	        alert("File not supported, .txt or .json files only");
 	    }
 		});
 
 		fileInput.click();
 	};
-};	
-
+};

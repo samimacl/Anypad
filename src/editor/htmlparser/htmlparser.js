@@ -49,6 +49,10 @@ core.htmlparser = core.htmlparser || function () {
     self.write(richTextField.contentWindow.document.body.innerHTML);
   };
 
+  this.update = function() {
+    richTextField.contentWindow.document.body.innerHTML = output;
+  };
+
   var createLineBreak = function () {
     var tag = openTag("br") + openTagClose(false) + "\u200C";
     self.buildCommand("insertHTML", false, tag);
