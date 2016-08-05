@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +14,7 @@
 
     <link rel="shortcut icon" href="src/assets/lib/pic/logo.png" type="image/x-icon" />
     <script type="text/javascript" src="src/assets/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="src/assets/lib/js/hyphenate.js"></script>
     <script type="text/javascript" src="src/editor/print/print.js"></script>
     <script type="text/javascript" src="src/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="src/editor/eventing/eventHandler.js"></script>
@@ -23,7 +24,7 @@
     <script type="text/javascript" src="src/editor/core/anypad.js"></script>
   </head>
 
-<body>
+<body class="hyphenate">
 
   <div class="page-header">
       <div id="header" class="row">
@@ -91,7 +92,7 @@
     </div>
 
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="well well-lg" name="richTextField" id="richTextField" src="src/editor.html"></iframe>
+        <iframe class="well well-lg hyphenate" name="richTextField" id="richTextField" src="src/editor.html"></iframe>
     </div>
   </div>
 <a id="dl"></a>

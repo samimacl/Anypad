@@ -35,9 +35,9 @@ var core = core || {};
 
         var childrenButton = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
         var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('Li'), 0);
-        var elements = new Array(childrenButton.concat(childrenLi).length);
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].addEventListener('click', buttonOnClickDelegate(elements[i]), false);
+        var elements = new Array(childrenButton.concat(childrenLi));
+        for (var i = 0; i < elements[0].length; i++) {
+            elements[0][i].addEventListener('click', buttonOnClickDelegate(elements[0][i]), false);
         }
       };
 
@@ -57,6 +57,7 @@ var core = core || {};
       };
 
       function buttononClickHandler(elem) {
+        console.log("click");
         var id = elem.getAttribute('id');
         //Color
         if (id.startsWith('c')) {
@@ -96,11 +97,11 @@ var core = core || {};
         }
       };
 
-      var changeColor( element ) {
+      var changeColor = function ( element ) {
 
       };
 
-      var changeSize ( element ) {
+      var changeSize = function ( element ) {
 
       };
   };
