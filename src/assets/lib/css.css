@@ -71,3 +71,8 @@ and open the template in the editor.
 #snow_color{
     color: snow;
 }
+
+.dropdown:hover #ul{
+    display:block;
+    
+}
