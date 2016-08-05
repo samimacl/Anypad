@@ -9,7 +9,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="src/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Eigene CSS -->
     <link href="src/assets/lib/css.css" rel="stylesheet">
+    
     <link rel="shortcut icon" href="src/assets/lib/pic/logo.png" type="image/x-icon" />
     <script type="text/javascript" src="src/assets/lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="src/assets/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -40,6 +42,23 @@
             <button id="2" class="btn btn-default glyphicon glyphicon-text-color" type="button" value="U"></button>
             <button id="3" class="btn btn-default glyphicon glyphicon-italic" type="button" value="I"></button>
             <button id="4" class="btn btn-default glyphicon glyphicon-text-size" type="button" value="Text Size"></button>
+            <div class="dropdown">
+
+		<button class="btn btn-danger" type="button" id="myButton">Show Menue</button>
+
+		<ul class="dropdown-menu">
+
+			<li><a href="#">Schuhe</a></li>
+
+			<li><a href="#">Pferd</a></li>
+
+			<li><a href="#">Fahrrad</a></li>
+
+			<li><a href="#">Moped</a></li>
+
+		</ul>
+
+            </div>
             <button id="5" class="btn btn-default glyphicon glyphicon-text-background" type="button" value="Text Color"></button>
             <button id="6" class="btn btn-default glyphicon glyphicon-apple" type="button" value="HR"></button>
             <button id="7" class="btn btn-default glyphicon glyphicon-apple" type="button" value="UL"></button>
@@ -52,6 +71,7 @@
             <button id="14" class="btn btn-default glyphicon glyphicon glyphicon-align-right" type="button" value="jRight"></button>
             <button id="15" class="btn btn-default glyphicon glyphicon glyphicon-align-justify" type="button" value="jBlock"></button>
             <button id="bPrint" type="button" class="btn btn-default glyphicon glyphicon-print" data-toggle="modal" data-target="#printDialog"></button>
+            <br>
             <div id="search" class="col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Suche</span>
@@ -111,6 +131,6 @@
       </div>
     </div>
   </div>
-
+<a id="dl"></a>
 </body>
 </html>

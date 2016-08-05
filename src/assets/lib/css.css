@@ -37,3 +37,6 @@ and open the template in the editor.
 #search{
 	float:right;
 }
+#dl{
+    display: none;
+}
