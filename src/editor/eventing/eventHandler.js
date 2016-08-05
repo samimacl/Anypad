@@ -60,12 +60,6 @@ var core = core || {};
           changeColor( elem );
         } else if (id.startsWith('s')) {
           changeSize( elem );
-        } else if (id == 4) {
-          var size = prompt('Enter a size 1 - 7', '');
-          anypad.iFontSize(commands[id-1], id, size);
-        } else if (id == 5) {
-          var color = prompt('Define a basic color or apply a hexadecimal color code for advanced colors:', '');
-          anypad.iForeColor(commands[id-1], id, color);
         } else if (id == 9) {
           var linkURL = prompt("Enter the URL for this link:", "http://");
           if (linkURL != null) {
@@ -93,11 +87,15 @@ var core = core || {};
 
 
       var changeColor = function( element ) {
-          alert("TEST1");
+          var color = element.dataset.color;
+          anypad.iForeColor('ForeColor', 5, color);
+          console.log(color);
       };
 
       var changeSize = function ( element ) {
-           alert("TEST1");
+           var size = element.dataset.size;
+           anypad.iFontSize('FontSize', 4, size);
+           console.log(size);
       };
   };
 } )();
