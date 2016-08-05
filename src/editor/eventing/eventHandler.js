@@ -91,16 +91,13 @@ var core = core || {};
         }
       };
 
-      var changeColor = function ( element ) {
-
-      };
 
       var changeColor = function( element ) {
-          console.log(element);
+          alert("TEST1");
       };
 
       var changeSize = function ( element ) {
-           console.log(element);
+           alert("TEST1");
       };
   };
 } )();
