@@ -33,7 +33,7 @@ and open the template in the editor.
 	margin-left: 2%;
         margin-right: 2%;
 }
-.ul{
+.ulcs{
     margin: -6px 0 0 12px;
 }
 
@@ -72,7 +72,7 @@ and open the template in the editor.
     color: snow;
 }
 
-.dropdown:hover #ul{
+.dropdown:hover .ulcs{
     display:block;
     
 }

@@ -34,7 +34,7 @@ var core = core || {};
         }, false);
 
         var childrenButton = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
-        var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('Li'), 0);
+        var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('li'), 0);
         var elements = new Array(childrenButton.concat(childrenLi).length);
         for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener('click', buttonOnClickDelegate(elements[i]), false);
@@ -96,12 +96,12 @@ var core = core || {};
         }
       };
 
-      var changeColor( element ) {
-
+      var changeColor = function( element ) {
+          console.log(element);
       };
 
-      var changeSize ( element ) {
-
+      var changeSize = function ( element ) {
+           console.log(element);
       };
   };
 } )();
