@@ -33,10 +33,41 @@ and open the template in the editor.
 	margin-left: 2%;
         margin-right: 2%;
 }
+#ul{
+    margin: -6px 0 0 12px;
+}
 
 #search{
-	float:right;
+	float:left;
+        padding-left: 0px;
 }
 #dl{
     display: none;
+}
+#red_color{
+    color: red;
+}
+#blue_color{
+    color: blue;   
+}
+#darkred_color{
+    color: darkred;   
+}
+#gold_color{
+    color: gold;
+}
+#lightblue_color{
+    color: lightblue;
+}
+#orange_color{
+    color: orange;
+}
+#pink_color{
+    color: pink;
+}
+#silver_color{
+    color: silver;
+}
+#snow_color{
+    color: snow;
 }
