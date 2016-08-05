@@ -74,6 +74,7 @@ var core = core || {};
     };
 
     self.initialize();
-    $('#myButton').dropdown();
+    $('#5').dropdown();
+    $('#4').dropdown();
   };
 } )();
