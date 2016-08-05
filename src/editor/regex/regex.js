@@ -61,9 +61,9 @@ util.regex = util.regex || function () {
     this.searchAndMarkText = function(forString, inString)
     {
 
-        inString = this.removeSpanWithAttributes(inString);
+        var checkString = this.removeSpanWithAttributes(inString);
         var currentID = 0;
-        var inNewString = inString;
+        var inNewString = checkString;
 
         var shouldStop = false;
         var finalString = "";
@@ -404,10 +404,11 @@ Rückgabewert ist der ersetze String
   {
       var regopen = new RegExp("<span[^>]*>", "gi");
       var regclose = new RegExp("</span[^>]*>", "gi");
-      str.replace(regopen, "");
-      str.replace(regclose,"");
+      var first = str;
+      first.replace(regopen, "");
+      first.replace(regclose,"");
       
-      return (str, regopen, regclose);
+      return first;
   }
   //Helper
 
