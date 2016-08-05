@@ -82,6 +82,18 @@ var core = core || {};
     this.openFile = function () {
       storage.importJSON();
     };
+    
+    $("#searchfield").keypress(function() {
+        var text = $("#searchfield").val().trim();
+        if(text.length == 0){
+        //console.log("TEXT LEER");
+        //NO SEARCH    
+        }
+        else{
+        //console.log(text);
+        //SEARCH    
+        }
+    });
 
     self.initialize();
     $('#5').dropdown();
