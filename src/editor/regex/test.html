@@ -1,15 +1,73 @@
 <html>
 
-    <button onclick="searchTest()">search test</button>
-    <button onclick="replaceTest()">replace test</button>
+    <button onclick="searchTest()">searchtest</button>
+    <button onclick="replaceTest()">replacetest</button>
+    <button onclick="addTagsTest()">addTagsTest</button>
+    <button onclick="removeTagsTest()">removeTagsTest</button>
+    <button onclick="makeStringFat()">makeStringFat</button>
+    <button onclick="makeStringKursiv()">makeStringKursiv</button>
+    <button onclick="makeStringUnderlined()">makeStringUnderlined</button>
+
 
     <script src="regex.js"></script>
     <script>
 
+        var tmpUtil = new util.regex();
+
+        function makeStringFat()
+        {
+            var text = prompt("Enter Text");
+
+            document.write(tmpUtil.makeStringFat(text));
+        }
+
+        function makeStringKursiv()
+        {
+            var text = prompt("Enter Text");
+
+            document.write(tmpUtil.makeStringKursiv(text));
+        }
+
+        function makeStringUnderlined()
+        {
+            var text = prompt("Enter Text");
+
+            document.write(tmpUtil.makeStringUnderlined(text));
+        }
+
+        function addTagsTest()
+        {
+            var text = prompt("Enter Text");
+            var open = prompt("Enter Tagopening String");
+            var close = prompt("Enter TagClose String");
+
+            document.write(tmpUtil.addTagsToString(text, open, close));
+        }
+
+        function removeTagsTest()
+        {
+            var text = prompt("Enter Text");
+            var open = prompt("Enter Tagopening String");
+            var close = prompt("Enter TagClose String");
+
+            document.write(tmpUtil.removeTagsFromString(text, open, close));
+        }
+
+        function checkTagsTest()
+        {
+            var text = prompt("Enter Text");
+            var open = prompt("Enter Tagopening String");
+            var close = prompt("Enter TagClose String");
+
+            document.write(tmpUtil.stringHasTags(text, open, close));
+
+        }
+
         function searchTest() {
+            
             var text = prompt("Enter Text");
             var search = prompt("Enter Search String");
-            var res = searchStringInString(search, text, "ig");
+            var res = tmpUtil.searchStringInString(search, text, "ig");
             for (cur in res)
             {
                 document.write(res[cur].found);
@@ -25,7 +83,7 @@
             var search2 = prompt("Enter search String");
             var replace = prompt("Enter replace String");
 
-            var result = replaceStringInString(search2, replace, text2);
+            var result = tmpUtil.replaceStringInString(search2, replace, text2);
 
             if ("replaced" in result)
             {
