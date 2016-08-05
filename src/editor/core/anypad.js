@@ -7,6 +7,7 @@ var core = core || {};
     var richTextField = editor;
     var htmlparser = new core.htmlparser();
     var userstorage = new util.userstorage();
+    var storage = new util.storage();
     var print = new util.print();
 
     this.getVersion = function () {
@@ -72,6 +73,27 @@ var core = core || {};
       var innerHTML = htmlparser.getHTML();
       print.doPrint( innerHTML );
     };
+
+    this.saveFile = function () {
+      var html = htmlparser.getHTML();
+      storage.exportJSON( html );
+    };
+
+    this.openFile = function () {
+      storage.importJSON();
+    };
+    
+    $("#searchfield").keypress(function() {
+        var text = $("#searchfield").val().trim();
+        if(text.length == 0){
+        //console.log("TEXT LEER");
+        //NO SEARCH    
+        }
+        else{
+        //console.log(text);
+        //SEARCH    
+        }
+    });
 
     self.initialize();
     $('#5').dropdown();

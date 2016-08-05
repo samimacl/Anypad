@@ -1,5 +1,3 @@
-'use strict';
-
 var core = core || {};
 
 ( function() {
@@ -33,10 +31,11 @@ var core = core || {};
           }
         }, false);
 
-        var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
-        var elemnts = new Array(children.length);
-        for (var i = 0; i < children.length; i++) {
-            children[i].addEventListener('click', buttonOnClickDelegate(children[i]), false);
+        var childrenButton = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
+        var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('Li'), 0);
+        var elements = new Array(childrenButton.concat(childrenLi));
+        for (var i = 0; i < elements[0].length; i++) {
+            elements[0][i].addEventListener('click', buttonOnClickDelegate(elements[0][i]), false);
         }
       };
 
@@ -57,12 +56,10 @@ var core = core || {};
 
       function buttononClickHandler(elem) {
         var id = elem.getAttribute('id');
-        if (id == 4) {
-          var size = prompt('Enter a size 1 - 7', '');
-          anypad.iFontSize(commands[id-1], id, size);
-        } else if (id == 5) {
-          var color = prompt('Define a basic color or apply a hexadecimal color code for advanced colors:', '');
-          anypad.iForeColor(commands[id-1], id, color);
+        if (id.startsWith('c')) {
+          changeColor( elem );
+        } else if (id.startsWith('s')) {
+          changeSize( elem );
         } else if (id == 9) {
           var linkURL = prompt("Enter the URL for this link:", "http://");
           if (linkURL != null) {
@@ -79,10 +76,26 @@ var core = core || {};
           };
         } else if (id == "bPrint") {
           anypad.openPrintDialog();
-        }
-        else {
+        } else if (id == "export") {
+          anypad.saveFile();
+        } else if (id == "import") {
+          anypad.openFile();
+        } else {
           anypad.simpleCommand(commands[id-1], id);
         }
+      };
+
+
+      var changeColor = function( element ) {
+          var color = element.dataset.color;
+          anypad.iForeColor('ForeColor', 5, color);
+          console.log(color);
+      };
+
+      var changeSize = function ( element ) {
+           var size = element.dataset.size;
+           anypad.iFontSize('FontSize', 4, size);
+           console.log(size);
       };
   };
 } )();

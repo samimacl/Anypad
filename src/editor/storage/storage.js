@@ -2,29 +2,16 @@ var util = util || {};
 util.storage = util.storage || function() {
 
 
-//wird nicht verwendet
-//	this.downloadDialog = function(){
-//
-//		var url = 'http://localhost/test.rtf';
-//		var url = dataStr;
-//		window.open(url, 'Download');		
-//	}
 
-	// soll inhalte aus html als .json file sichern. Tut dies inklusive Tags. 
-	// Die resultierende Datei hat die Dateieindung .json und enthält ein json-Objekt 
-	// mit dem name-value-pair "content":"inhalt der seite".
-	
-
-
+	/** Der Funktion wird HTML-Text übergeben. 
+	Es erscheint ein Dialog, in dem der Nutzer den Namen der Datei und den Ort der Speicherung
+	auswählen kann. Der Inhalt wird als .json file inklusive Tags gesichert. 
+	@param {string} innerHTML - Das HTML, das für den Download übergeben wird.
+	*/
 
 	this.exportJSON = function( innerHTML ) {
-		 
-		 var datei = innerHTML;
 
-	//hatte das potenzial sinn zu machen, machte aber keinen:
-	//var dataStr = "data:text/json;charset=utf-8," + 
-	//"data = [{\"content\"" + ": " + "\"" + datei + "\"}];";
-
+		var datei = innerHTML;
 		var dataStr ="data:text/json;charset=utf-8," + datei;
 
 		 //download der datei
@@ -35,12 +22,11 @@ util.storage = util.storage || function() {
 
 	};
 
-	//Eine Hilfsfunktion zum Testen, die den text einer seite löscht.
-	//this.resetText = function() {
-	//	var leer = "";
-	//	document.getElementById("text").innerHTML = leer;
-	//};
-
+	/** Die Funktion ermöglicht das Hochladen und Anzeigen einer .json oder .txt Datei 
+	in der Anwendung. Die Datei wird per Dialog ausgewählt. Es wird entweder ein Fehler 
+	zurückgegeben oder der Inhalt der ausgelesenen Datei wird direkt als Text in die 
+	HTML-Seite geschrieben.
+	*/
 
 	this.importJSON = function() {
 
@@ -55,17 +41,15 @@ util.storage = util.storage || function() {
 	        var reader = new FileReader();
 	        reader.onload = function() {
 
-	            var ergebnis = reader.result;
-	            return ergebnis;
-
+	            var html = reader.result;
+				document.getElementById("richTextField").contentWindow.document.body.innerHTML = html;
 	        };
-	        reader.readAsText(file);    
+	        reader.readAsText(file);
 	    } else {
-	        return "<p>File not supported, .txt or .json files only</p>";
+	        alert("File not supported, .txt or .json files only");
 	    }
 		});
 
 		fileInput.click();
 	};
-};	
-
+};
