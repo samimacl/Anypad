@@ -31,6 +31,7 @@ getRegexForSearchString
 executeSearchRegex
 */
 
+//id immer search
 
 var util = util || {};
 util.regex = util.regex || function () {
@@ -54,12 +55,43 @@ util.regex = util.regex || function () {
     //es wird ein replaceString gebildet (repl), welcher aus dem searchString (forString) besteht, eingeschlossen von HTML Tags (repl)
     //sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
     //rückgabewert ist der markierte text
+
+
+
     this.searchAndMarkText = function(forString, inString)
     {
-        var repl = "<b>" + forString + "</b>";
-        var result = this.replaceStringInString(forString, repl, inString);
+        var currentID = 0;
+        var inNewString = inString;
 
-        return result.result;
+        var shouldStop = false;
+        var finalString = "";
+        var stopStr = "";
+        while (shouldStop == false)
+        {
+            var obj = this.searchStringInStringTillFirstMatch(forString, inNewString)
+            if (obj.length != 0)
+            {
+                var index = obj[0].index;
+                var spanAttr = "style='color:blue;background-color: yellow' currentID=" + currentID;
+                var repl = this.addSpanWithAttributesToString(obj[0].found, spanAttr);
+                var nextIndex = index + repl.length;
+                inNewString = this.replaceStringInStringAtIndex(forString, repl, inNewString, index);
+                var test = this.splitString(inNewString, nextIndex);
+                finalString += test[0];
+                inNewString = test[1];
+                stopStr = test[1];
+                currentID += 1;
+            }
+            else
+            {
+                shouldStop = true;
+                finalString += stopStr;
+                break;
+            }
+        }
+
+
+        return finalString;
     }
 
     //kompletter Text (inString) kann nach einem Schlüsselwort (searchString) durchsucht
@@ -68,6 +100,7 @@ util.regex = util.regex || function () {
   this.searchStringInString = function(searchString, inString, attributes)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, attributes)
+      this.replaceStringInString();
       return this.executeSearchRegex(inString, regex);
   }
 
@@ -103,6 +136,11 @@ util.regex = util.regex || function () {
       result:string //der ersetzte String
   }
   */
+  this.searchAllSpans = function(inString)
+  {
+      var regexA = new RegExp();
+  }
+
   this.replaceStringInString = function (searchString,replaceString, inString)
   {
       var regexA = this.getRegexForSearchString(searchString, null,null, "gi");
@@ -357,7 +395,6 @@ Rückgabewert ist der ersetze String
 
   
   /*
-  geht nocht nicht!
   string (str) wird per regex auf span tags durchsucht, span tags werden entfernt
   rückgabewert ist ein string ohne die entsprechende Tags
   */
@@ -365,9 +402,11 @@ Rückgabewert ist der ersetze String
   {
       var regopen = new RegExp("<span[^>]*>", "gi");
       var regclose = new RegExp("</span[^>]*>", "gi");
-      return this.removeTagsFromString(str, regopen, regclose);
+      str.replace(regopen, "");
+      str.replace(regclose,"");
+      
+      return (str, regopen, regclose);
   }
-
   //Helper
 
   /*search Regex (regex) wird auf zu durchsuchenden string (text) ausgeführt
@@ -391,8 +430,10 @@ Rückgabewert ist der ersetze String
       }
       else {
           if (match = regex.exec(text)) {
-              res.push(match);
-          }
+	              res.push({
+                  found:match,
+                  index:match.index
+              });          }
       }
 
       return res;
