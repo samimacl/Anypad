@@ -19,6 +19,7 @@
     <script type="text/javascript" src="src/editor/eventing/eventHandler.js"></script>
     <script type="text/javascript" src="src/editor/storage/storage.js"></script>
     <script type="text/javascript" src="src/editor/storage/userstorage.js"></script>
+    <script type="text/javascript" src="src/editor/regex/regex.js"></script>
     <script type="text/javascript" src="src/editor/htmlparser/htmlparser.js"></script>
     <script type="text/javascript" src="src/editor/core/anypad.js"></script>
   </head>
@@ -45,20 +46,20 @@
             <div class="btn dropdown">
                 <button id="4" class="btn btn-default glyphicon glyphicon-text-size" type="button" value="Text Size"></button>
                 <ul  class="ulcs btn btn-default dropdown-menu">
-			<li id="s1" data-size="1" class="btn btn-default glyphicon glyphicon-text-size">1</li>
-			<li id="s2" data-size="2" class="btn btn-default glyphicon glyphicon-text-size">2</li>
-                        <li id="s3" data-size="3" class="btn btn-default glyphicon glyphicon-text-size">3</li>
-                        <li id="s4" data-size="4" class="btn btn-default glyphicon glyphicon-text-size">4</li>
-                        <li id="s5" data-size="5" class="btn btn-default glyphicon glyphicon-text-size">5</li>
-                        <li id="s6" data-size="6" class="btn btn-default glyphicon glyphicon-text-size">6</li>
-                        <li id="s7" data-size="7" class="btn btn-default glyphicon glyphicon-text-size">7</li>
-		</ul>
+			                <li id="s1" data-size="1" class="btn btn-default glyphicon glyphicon-text-size">1</li>
+			                <li id="s2" data-size="2" class="btn btn-default glyphicon glyphicon-text-size">2</li>
+                      <li id="s3" data-size="3" class="btn btn-default glyphicon glyphicon-text-size">3</li>
+                      <li id="s4" data-size="4" class="btn btn-default glyphicon glyphicon-text-size">4</li>
+                      <li id="s5" data-size="5" class="btn btn-default glyphicon glyphicon-text-size">5</li>
+                      <li id="s6" data-size="6" class="btn btn-default glyphicon glyphicon-text-size">6</li>
+                      <li id="s7" data-size="7" class="btn btn-default glyphicon glyphicon-text-size">7</li>
+		            </ul>
             </div>
             <div class="btn dropdown">
-		<button class="btn btn-default glyphicon glyphicon-text-background" type="button"  value="Text Color"></button>
-		<ul class="ulcs btn btn-default dropdown-menu">
-			<li id="c1" data-color="black" class="btn btn-default glyphicon glyphicon-text-color black_color"></li>
-			<li id="c2" data-color="red" class="btn btn-default glyphicon glyphicon-text-color red_color"></li>
+		            <button class="btn btn-default glyphicon glyphicon-text-background" type="button"  value="Text Color"></button>
+		              <ul class="ulcs btn btn-default dropdown-menu">
+			                  <li id="c1" data-color="black" class="btn btn-default glyphicon glyphicon-text-color black_color"></li>
+			                  <li id="c2" data-color="red" class="btn btn-default glyphicon glyphicon-text-color red_color"></li>
                         <li id="c3" data-color="blue" class="btn btn-default glyphicon glyphicon-text-color blue_color"></li>
                         <li id="c4" data-color="darkred" class="btn btn-default glyphicon glyphicon-text-color darkred_color"></li>
                         <li id="c5" data-color="gold" class="btn btn-default glyphicon glyphicon-text-color gold_color"></li>
@@ -79,7 +80,9 @@
             <button id="13" class="btn btn-default glyphicon glyphicon glyphicon glyphicon-align-center" type="button" value="jCenter"></button>
             <button id="14" class="btn btn-default glyphicon glyphicon glyphicon-align-right" type="button" value="jRight"></button>
             <button id="15" class="btn btn-default glyphicon glyphicon glyphicon-align-justify" type="button" value="jBlock"></button>
-            <button id="bPrint" type="button" class="btn btn-default glyphicon glyphicon-print" value="print"></button>
+            <button id="bPrint" class="btn btn-default glyphicon glyphicon-print" type="button" value="print"></button>
+            <button id="export" class="btn btn-default glyphicon glyphicon-floppy-disk" type="button" value="export"></button>
+            <button id="import" class="btn btn-default glyphicon glyphicon-folder-open" type="button" value="import"></button>
             <div id="search" class="col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon">Suche</span>

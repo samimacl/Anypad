@@ -56,6 +56,7 @@ core.htmlparser = core.htmlparser || function () {
   var createLineBreak = function () {
     var tag = openTag("br") + openTagClose(false) + "\u200C";
     self.buildCommand("insertHTML", false, tag);
+    self.buildCommand("insertBrOnReturn", false, true);
   };
 
   var openTag = function(tagname) {

@@ -9,6 +9,7 @@ var core = core || {};
     var userstorage = new util.userstorage();
     var storage = new util.storage();
     var print = new util.print();
+    var regex = new util.regex();
 
     this.getVersion = function () {
       return version;
@@ -82,17 +83,19 @@ var core = core || {};
     this.openFile = function () {
       storage.importJSON();
     };
-    
-    $("#searchfield").keypress(function() {
-        var text = $("#searchfield").val().trim();
+
+    $('#searchfield').bind('input', function() {
+        var text = $(this).val().trim();
+        var innerHTML = htmlparser.getHTML();
+        var result;
+
         if(text.length == 0){
-        //console.log("TEXT LEER");
-        //NO SEARCH    
+          result = regex.removeSpanWithAttributes(innerHTML);
         }
         else{
-        //console.log(text);
-        //SEARCH    
+          result = regex.searchAndMarkText(text, innerHTML);
         }
+        self.writeHTML( result, false );
     });
 
     self.initialize();
