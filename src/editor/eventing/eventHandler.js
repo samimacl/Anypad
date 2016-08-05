@@ -33,10 +33,11 @@ var core = core || {};
           }
         }, false);
 
-        var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
-        var elemnts = new Array(children.length);
-        for (var i = 0; i < children.length; i++) {
-            children[i].addEventListener('click', buttonOnClickDelegate(children[i]), false);
+        var childrenButton = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
+        var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('Li'), 0);
+        var elements = new Array(childrenButton.concat(childrenLi).length);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener('click', buttonOnClickDelegate(elements[i]), false);
         }
       };
 
@@ -57,7 +58,13 @@ var core = core || {};
 
       function buttononClickHandler(elem) {
         var id = elem.getAttribute('id');
-        if (id == 4) {
+        //Color
+        if (id.startsWith('c')) {
+          changeColor( elem );
+        } else if (id.startsWith('s')) {
+          changeSize( elem );
+        }
+        else if (id == 4) {
           var size = prompt('Enter a size 1 - 7', '');
           anypad.iFontSize(commands[id-1], id, size);
         } else if (id == 5) {
@@ -87,6 +94,14 @@ var core = core || {};
         else {
           anypad.simpleCommand(commands[id-1], id);
         }
+      };
+
+      var changeColor( element ) {
+
+      };
+
+      var changeSize ( element ) {
+
       };
   };
 } )();
