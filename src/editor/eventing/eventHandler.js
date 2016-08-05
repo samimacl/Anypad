@@ -35,8 +35,7 @@ var core = core || {};
 
         var children = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
         var elemnts = new Array(children.length);
-        /* -1: Es sollen nur die ersten 14 Buttons per Schleife registriert werden */
-        for (var i = 0; i < children.length - 1; i++) {
+        for (var i = 0; i < children.length; i++) {
             children[i].addEventListener('click', buttonOnClickDelegate(children[i]), false);
         }
       };
@@ -78,7 +77,10 @@ var core = core || {};
           if (anypad.detectSelection('DIV')) {
             anypad.simpleCommand(commands[id-1], id);
           };
-        } else {
+        } else if (id == "bPrint") {
+          anypad.openPrintDialog();
+        }
+        else {
           anypad.simpleCommand(commands[id-1], id);
         }
       };

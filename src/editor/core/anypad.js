@@ -7,7 +7,7 @@ var core = core || {};
     var richTextField = editor;
     var htmlparser = new core.htmlparser();
     var userstorage = new util.userstorage();
-    /* print.js instanziieren */
+    var print = new util.print();
 
     this.getVersion = function () {
       return version;
@@ -66,6 +66,11 @@ var core = core || {};
       }
 
       return false;
+    };
+
+    this.openPrintDialog = function () {
+      var innerHTML = htmlparser.getHTML();
+      print.doPrint( innerHTML );
     };
 
     self.initialize();
