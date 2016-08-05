@@ -36,10 +36,6 @@ var core = core || {};
         var elements = new Array(childrenButton.concat(childrenLi));
         for (var i = 0; i < elements[0].length; i++) {
             elements[0][i].addEventListener('click', buttonOnClickDelegate(elements[0][i]), false);
-        var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('li'), 0);
-        var elements = new Array(childrenButton.concat(childrenLi).length);
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].addEventListener('click', buttonOnClickDelegate(elements[i]), false);
         }
       };
 
@@ -59,15 +55,12 @@ var core = core || {};
       };
 
       function buttononClickHandler(elem) {
-        console.log("click");
         var id = elem.getAttribute('id');
-        //Color
         if (id.startsWith('c')) {
           changeColor( elem );
         } else if (id.startsWith('s')) {
           changeSize( elem );
-        }
-        else if (id == 4) {
+        } else if (id == 4) {
           var size = prompt('Enter a size 1 - 7', '');
           anypad.iFontSize(commands[id-1], id, size);
         } else if (id == 5) {
@@ -93,8 +86,7 @@ var core = core || {};
           anypad.saveFile();
         } else if (id == "import") {
           anypad.openFile();
-        }
-        else {
+        } else {
           anypad.simpleCommand(commands[id-1], id);
         }
       };
