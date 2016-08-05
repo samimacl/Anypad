@@ -2,7 +2,6 @@ var util = util ||  {};
 util.userstorage = util.userstorage || function( prefix ) {
   var self = this;
   var prefix = prefix;
-  /* ToDo: Name der Klasse anpassen - Felix hat diese gebaut*/
   var json = new util.storage();
 
   this.getAllItems = function() {
