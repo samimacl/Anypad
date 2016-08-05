@@ -47,28 +47,31 @@ and open the template in the editor.
 #red_color{
     color: red;
 }
-#blue_color{
+.black_color{
+    color: black;
+}
+.blue_color{
     color: blue;   
 }
-#darkred_color{
+.darkred_color{
     color: darkred;   
 }
-#gold_color{
+.gold_color{
     color: gold;
 }
-#lightblue_color{
+.lightblue_color{
     color: lightblue;
 }
-#orange_color{
+.orange_color{
     color: orange;
 }
-#pink_color{
+.pink_color{
     color: pink;
 }
-#silver_color{
+.silver_color{
     color: silver;
 }
-#snow_color{
+.snow_color{
     color: snow;
 }
 
