@@ -56,10 +56,12 @@ util.regex = util.regex || function () {
     //sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
     //rückgabewert ist der markierte text
 
-
+    var currentResults;
 
     this.searchAndMarkText = function(forString, inString)
     {
+
+        inString = this.removeSpanWithAttributes(inString);
         var currentID = 0;
         var inNewString = inString;
 
