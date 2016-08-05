@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,6 @@
 
     <link rel="shortcut icon" href="src/assets/lib/pic/logo.png" type="image/x-icon" />
     <script type="text/javascript" src="src/assets/lib/js/jquery.min.js"></script>
-    <script type="text/javascript" src="src/assets/lib/js/hyphenate.js"></script>
     <script type="text/javascript" src="src/editor/print/print.js"></script>
     <script type="text/javascript" src="src/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="src/editor/eventing/eventHandler.js"></script>
@@ -24,7 +23,7 @@
     <script type="text/javascript" src="src/editor/core/anypad.js"></script>
   </head>
 
-<body class="hyphenate">
+<body>
 
   <div class="page-header">
       <div id="header" class="row">
@@ -46,7 +45,7 @@
             <div class="btn dropdown">
                 <button id="4" class="btn btn-default glyphicon glyphicon-text-size" type="button" value="Text Size"></button>
                 <ul  class="ulcs btn btn-default dropdown-menu">
-			<li id="s1"><span  class="btn btn-default glyphicon glyphicon-text-size">1</span></li>
+			<li id="s1"  class="btn btn-default glyphicon glyphicon-text-size">1</li>
 			<li id="s2"><span  class="btn btn-default glyphicon glyphicon-text-size">2</span></li>
                         <li id="s3"><span  class="btn btn-default glyphicon glyphicon-text-size">3</span></li>
                         <li id="s4"><span  class="btn btn-default glyphicon glyphicon-text-size">4</span></li>
@@ -60,7 +59,7 @@
 		<ul class="ulcs btn btn-default dropdown-menu">
 			<li id="c1" data-color="black"><span id="black_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
 			<li id="c2" data-color="red"><span id="red_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
-                        <li id="c" data-color="blue"><span id="blue_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
+                        <li id="c3" data-color="blue"><span id="blue_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
                         <li id="c4" data-color="darkred"><span id="darkred_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
                         <li id="c5" data-color="gold" ><span id="gold_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
                         <li id="c6" data-color="lightblue"><span id="lightblue_color" class="btn btn-default glyphicon glyphicon-text-color"></span></li>
@@ -92,7 +91,7 @@
     </div>
 
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="well well-lg hyphenate" name="richTextField" id="richTextField" src="src/editor.html"></iframe>
+        <iframe class="well well-lg" name="richTextField" id="richTextField" src="src/editor.html"></iframe>
     </div>
   </div>
 <a id="dl"></a>
