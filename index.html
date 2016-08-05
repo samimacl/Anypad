@@ -14,6 +14,7 @@
     
     <link rel="shortcut icon" href="src/assets/lib/pic/logo.png" type="image/x-icon" />
     <script type="text/javascript" src="src/assets/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="src/editor/print/print.js"></script>
     <script type="text/javascript" src="src/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="src/editor/eventing/eventHandler.js"></script>
     <script type="text/javascript" src="src/editor/util/JSONConnector.js"></script>
@@ -43,14 +44,19 @@
             <button id="3" class="btn btn-default glyphicon glyphicon-italic" type="button" value="I"></button>
             <button id="4" class="btn btn-default glyphicon glyphicon-text-size" type="button" value="Text Size"></button>
             <div class="dropdown">
-		<button class="btn btn-danger" type="button" id="myButton">Show Menue</button>
+		<button class="btn btn-default glyphicon glyphicon-text-background" type="button" id="myButton" value="Text Color"></button>
 		<ul class="dropdown-menu">
-			<li><a href="#">Schuhe</a></li>
-			<li><a href="#">Pferd</a></li>
-			<li><a href="#">Fahrrad</a></li>
-			<li><a href="#">Moped</a></li>
+			<li id="black"></li>
+			<li id="black"></li>
+			<li id="black"></li>
+			<li id="black"></li>
+                        <li id="black"></li>
+                        <li id="black"></li>
+                        <li id="black"></li>
+                        <li id="black"></li>
+                        <li id="black"></li>
+                        <li id="black"></li>
 		</ul>
-
             </div>
             <button id="5" class="btn btn-default glyphicon glyphicon-text-background" type="button" value="Text Color"></button>
             <button id="6" class="btn btn-default glyphicon glyphicon-apple" type="button" value="HR"></button>
@@ -63,7 +69,7 @@
             <button id="13" class="btn btn-default glyphicon glyphicon glyphicon glyphicon-align-center" type="button" value="jCenter"></button>
             <button id="14" class="btn btn-default glyphicon glyphicon glyphicon-align-right" type="button" value="jRight"></button>
             <button id="15" class="btn btn-default glyphicon glyphicon glyphicon-align-justify" type="button" value="jBlock"></button>
-            <button id="bPrint" type="button" class="btn btn-default glyphicon glyphicon-print"></button>
+            <button id="bPrint" type="button" class="btn btn-default glyphicon glyphicon-print" value="print"></button>
             <br>
             <div id="search" class="col-lg-6">
                 <div class="input-group">
