@@ -7,13 +7,21 @@
     <button onclick="makeStringFat()">makeStringFat</button>
     <button onclick="makeStringKursiv()">makeStringKursiv</button>
     <button onclick="makeStringUnderlined()">makeStringUnderlined</button>
-
+    <button onclick="searchAndMark()">searchAndMark</button>
 
     <script src="regex.js"></script>
     <script>
 
         var tmpUtil = new util.regex();
 
+
+        function searchAndMark()
+        {
+            var text = prompt("enter text");
+            var search = prompt("snter search");
+
+            document.write(tmpUtil.searchAndMarkText(search, text));
+        }
         function makeStringFat()
         {
             var text = prompt("Enter Text");
