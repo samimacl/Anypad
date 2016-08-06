@@ -1,14 +1,17 @@
 var util = util || {};
+
+/**
+* storage dient dazu den Inhalt des Editors zu sichern und wieder zu öffnen.
+* @class
+*	@constructor
+*/
 util.storage = util.storage || function() {
 
-
-
 	/** Der Funktion wird HTML-Text übergeben.
-	Es erscheint ein Dialog, in dem der Nutzer den Namen der Datei und den Ort der Speicherung
-	auswählen kann. Der Inhalt wird als .json file inklusive Tags gesichert.
-	@param {string} innerHTML - Das HTML, das für den Download übergeben wird.
+	*	Es erscheint ein Dialog, in dem der Nutzer den Namen der Datei und den Ort der Speicherung
+	*	auswählen kann. Der Inhalt wird als .json file inklusive Tags gesichert.
+	* @param {string} innerHTML - Das HTML, das für den Download übergeben wird
 	*/
-
 	this.exportJSON = function( innerHTML ) {
 
 		var datei = innerHTML;
@@ -23,11 +26,10 @@ util.storage = util.storage || function() {
 	};
 
 	/** Die Funktion ermöglicht das Hochladen und Anzeigen einer .json oder .txt Datei
-	in der Anwendung. Die Datei wird per Dialog ausgewählt. Es wird entweder ein Fehler
-	zurückgegeben oder der Inhalt der ausgelesenen Datei wird direkt als Text in die
-	HTML-Seite geschrieben.
+	*	in der Anwendung. Die Datei wird per Dialog ausgewählt. Es wird entweder ein Fehler
+	*	zurückgegeben oder der Inhalt der ausgelesenen Datei wird direkt als Text in die
+	*	HTML-Seite geschrieben.
 	*/
-
 	this.importJSON = function() {
 
 		var element = document.createElement('div');

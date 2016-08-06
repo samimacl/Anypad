@@ -1,15 +1,16 @@
 var util = util || {};
 
 /**
- * Erstellung eines Printobjekt
- * Deklarierung einr Funktion zum Weierverabeiten des HTLM aus dem iFrame
+ * Erstellung eines Printobjekt.
  * @class
  * @constructor
- * @param {window} printwindow - Neues Fenster bzw. Druckvorschau
- * @param {string} innerHTML - Übergebener HTML-Element zum Drucken
  */
-
 util.print = util.print || function () {
+  
+  /**
+   * Druckvorgang wird gestartet.
+   * @param {string} innerHTML - Das zu druckende HTML
+   */
   this.doPrint = function ( innerHTML ) {
     var printwindow = window.open();
     try {
