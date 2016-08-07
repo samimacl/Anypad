@@ -1,5 +1,5 @@
 <html>
-
+<body>
     <button onclick="searchTest()">searchtest</button>
     <button onclick="replaceTest()">replacetest</button>
     <button onclick="addTagsTest()">addTagsTest</button>
@@ -7,7 +7,14 @@
     <button onclick="makeStringFat()">makeStringFat</button>
     <button onclick="makeStringKursiv()">makeStringKursiv</button>
     <button onclick="makeStringUnderlined()">makeStringUnderlined</button>
+    <br />
+
+    <textarea id="searchArea" placeholder="awesometext"></textarea>
+    <br />
+    <textarea id="searchfield"  placeholder="search"></textarea>
+    <br />
     <button onclick="searchAndMark()">searchAndMark</button>
+
 
     <script src="regex.js"></script>
     <script>
@@ -15,36 +22,35 @@
         var tmpUtil = new util.regex();
 
 
-        function searchAndMark()
-        {
-            var text = prompt("enter text");
-            var search = prompt("snter search");
+        function searchAndMark() {
+            var text = document.getElementById("searchArea").value;
+            var search = document.getElementById("searchfield").value;
+            var idk = tmpUtil.searchAndMarkText(search, text);
+            document.write(idk);
+            var withoutSpans = tmpUtil.removeSpanWithAttributes(idk);
+            document.write("<br />");
+            document.write(withoutSpans);
 
-            document.write(tmpUtil.searchAndMarkText(search, text));
         }
-        function makeStringFat()
-        {
+        function makeStringFat() {
             var text = prompt("Enter Text");
 
             document.write(tmpUtil.makeStringFat(text));
         }
 
-        function makeStringKursiv()
-        {
+        function makeStringKursiv() {
             var text = prompt("Enter Text");
 
             document.write(tmpUtil.makeStringKursiv(text));
         }
 
-        function makeStringUnderlined()
-        {
+        function makeStringUnderlined() {
             var text = prompt("Enter Text");
 
             document.write(tmpUtil.makeStringUnderlined(text));
         }
 
-        function addTagsTest()
-        {
+        function addTagsTest() {
             var text = prompt("Enter Text");
             var open = prompt("Enter Tagopening String");
             var close = prompt("Enter TagClose String");
@@ -52,8 +58,7 @@
             document.write(tmpUtil.addTagsToString(text, open, close));
         }
 
-        function removeTagsTest()
-        {
+        function removeTagsTest() {
             var text = prompt("Enter Text");
             var open = prompt("Enter Tagopening String");
             var close = prompt("Enter TagClose String");
@@ -61,8 +66,7 @@
             document.write(tmpUtil.removeTagsFromString(text, open, close));
         }
 
-        function checkTagsTest()
-        {
+        function checkTagsTest() {
             var text = prompt("Enter Text");
             var open = prompt("Enter Tagopening String");
             var close = prompt("Enter TagClose String");
@@ -72,12 +76,11 @@
         }
 
         function searchTest() {
-            
+
             var text = prompt("Enter Text");
             var search = prompt("Enter Search String");
             var res = tmpUtil.searchStringInString(search, text, "ig");
-            for (cur in res)
-            {
+            for (cur in res) {
                 document.write(res[cur].found);
                 document.write(" at index ");
                 document.write(res[cur].index);
@@ -85,18 +88,15 @@
             }
         }
 
-        function replaceTest()
-        {
+        function replaceTest() {
             var text2 = prompt("Enter text for replacing");
             var search2 = prompt("Enter search String");
             var replace = prompt("Enter replace String");
 
             var result = tmpUtil.replaceStringInString(search2, replace, text2);
 
-            if ("replaced" in result)
-            {
-                for(x in result["replaced"])
-                {
+            if ("replaced" in result) {
+                for (x in result["replaced"]) {
                     document.write(result["replaced"][x].found);
                     document.write(" at index ");
                     document.write(result["replaced"][x].index);
@@ -104,8 +104,7 @@
 
                 }
             }
-            else
-            {
+            else {
                 document.write("No charackters were found or changed");
                 document.write("<br>");
             }
@@ -113,4 +112,6 @@
             document.write(result["result"]);
         }
     </script>
+</body>
+
 </html>

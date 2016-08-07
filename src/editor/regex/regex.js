@@ -402,13 +402,9 @@ Rückgabewert ist der ersetze String
   */
   this.removeSpanWithAttributes = function(str)
   {
-      var regopen = new RegExp("<span[^>]*>", "gi");
-      var regclose = new RegExp("</span[^>]*>", "gi");
-      var first = str;
-      first.replace(regopen, "");
-      first.replace(regclose,"");
-      
-      return first;
+      str = str.replace(/<\/?span[^>]*>/g, "");
+
+      return str;
   }
   //Helper
 
