@@ -86,8 +86,12 @@ util.regex = util.regex || function () {
             }
             else
             {
-                shouldStop = true;
+                shouldStop = true
                 finalString += stopStr;
+                if (finalString == "")
+                {
+                    finalString = checkString;
+                }
                 break;
             }
         }
