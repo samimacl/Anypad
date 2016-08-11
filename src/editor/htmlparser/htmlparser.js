@@ -10,6 +10,7 @@ core.htmlparser = core.htmlparser || function () {
   var self = this;
   var output;
   var richTextField;
+  var regex = new util.regex();
 
   /**
   * Setzt output zurück.
@@ -32,7 +33,20 @@ core.htmlparser = core.htmlparser || function () {
   * @param {string} text - HTML, was geschrieben werden soll
   */
   this.write = function (text) {
+    text = buildHyphenate( text );
     output = text;
+  };
+
+  /*
+  * T E S T
+  */
+  var buildHyphenate = function ( rawHTML ) {
+    var resultObj = regex.replaceStringInString('<div', '<div class="hyphenate" lang="de" ', rawHTML);
+    if (resultObj.result !== '') {
+      rawHTML = resultObj.result;
+    }
+
+    return rawHTML;
   };
 
   /**
@@ -69,7 +83,7 @@ core.htmlparser = core.htmlparser || function () {
   * @return {string} HTMLSchema - Default HTML-Schema
   */
   this.getHTMLDefault = function () {
-    return "<div><br></div>";
+    return '<div><br></div>';
   };
 
   /**
@@ -91,8 +105,9 @@ core.htmlparser = core.htmlparser || function () {
   * Erstellt einen Zeilenumbruch.
   */
   var createLineBreak = function () {
-    var tag = openTag("br") + openTagClose(false) + "\u200C";
-    output = output.concat(tag);
+    var tag = attribute(openTag("br"), "class", "br_enter") + openTagClose(false) + "\u200C";
+    console.log(tag);
+    self.buildCommand('insertHTML', false, tag);
   };
 
   /**
@@ -115,6 +130,11 @@ core.htmlparser = core.htmlparser || function () {
     } else {
       return '>';
     }
+  };
+
+  var attribute = function (tag, attribute, value) {
+    var elem = ' ' + attribute + '="' + value + '"';
+    return tag.concat(elem);
   };
 
   /**

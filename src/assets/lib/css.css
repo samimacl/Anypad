@@ -3,19 +3,19 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 02.08.2016, 10:28:30
     Author     : merktim
 */
 #wysiwyg_cp{
 	margin-left: 1%;
         margin-right: 1% ;
-        
+
 }
 
 #header{
 	margin-left: 1%;
-        margin-right: 1%; 
+        margin-right: 1%;
 }
 
 #text_header{
@@ -23,10 +23,10 @@ and open the template in the editor.
 }
 
 #logo{
-    height:60px; 
+    height:60px;
     widht:60px;
     position: static;
-    margin-left: 50%;	      
+    margin-left: 50%;
 }
 
 #editor{
@@ -51,10 +51,10 @@ and open the template in the editor.
     color: black;
 }
 .blue_color{
-    color: blue;   
+    color: blue;
 }
 .darkred_color{
-    color: darkred;   
+    color: darkred;
 }
 .gold_color{
     color: gold;
@@ -77,5 +77,10 @@ and open the template in the editor.
 
 .dropdown:hover .ulcs{
     display:block;
-    
+}
+
+.br_enter {
+	display: block;
+	margin-top: 10px;
+	content: " ";
 }

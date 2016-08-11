@@ -162,19 +162,19 @@ var core = core || {};
     * @param {string} searchstring - String, nach dem gesucht werden soll
     */
     this.search = function (searchString) {
-      console.log(searchString.length);
       var innerHTML = htmlparser.getHTML();
       var result;
 
       if(searchString.length == 0){
         result = regex.removeSpanWithAttributes(innerHTML);
-        console.log(result);
       }
       else{
         result = regex.searchAndMarkText(searchString, innerHTML);
       }
-      self.writeHTML( result, false );
-      self.updateContent();
+      if (result !== "") {
+        self.writeHTML( result, false );
+        self.updateContent();
+      }
     };
 
     self.initialize();

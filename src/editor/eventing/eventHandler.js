@@ -110,6 +110,8 @@ var core = core || {};
         } else {
           anypad.simpleCommand(commands[id-1], id);
         }
+        //damit Änderungen in Editor geladen werden.
+        anypad.updateContent();
       };
 
       /**
