@@ -163,12 +163,15 @@ var core = core || {};
     */
     this.search = function (searchString) {
       var innerHTML = htmlparser.getHTML();
+      console.log(innerHTML);
       var result;
 
       if(searchString.length == 0){
+        $(".replace").hide();  
         result = regex.removeSpanWithAttributes(innerHTML);
       }
       else{
+        $(".replace").css("display","table-cell");
         result = regex.searchAndMarkText(searchString, innerHTML);
       }
       if (result !== "") {
