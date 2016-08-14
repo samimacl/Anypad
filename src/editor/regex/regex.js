@@ -56,7 +56,88 @@ util.regex = util.regex || function () {
     //sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
     //rückgabewert ist der markierte text
 
-    var currentResults;
+    this.replaceStringAtID = function(ID, replaceString, inString)
+    {
+        var regexString = "<\/?span[^>]*currentID=" + "'" + ID + "'" + ">" + "(.|\n)*?<\/span>";
+
+        var regex = new RegExp(regexString, "i");
+        inString = inString.replace(regex, replaceString);
+
+        return inString;
+    }
+
+    this.searchAndMarkTextIgnoringTags = function (forString, inString)
+    {
+        inString = this.removeSpanWithAttributes(inString);
+        var check = this.searchStringInStringTillFirstMatch(inString);
+        
+        if (check.length != 0) {
+            var tagOpened = false;
+            var res = {
+                search: forString,
+                default: inString,
+                results: []
+            };
+
+            var currentID = 0;
+
+            for (var i = 0; i < inString.length;) {
+                var curChar = inString.charAt(i);
+                if (tagOpened) {
+                    if (curChar == '>') {
+                        tagOpened = false;
+                    }
+
+                    i++;
+                }
+
+                else {
+                    if (curChar == '<') {
+                        tagOpened = true;
+                        i++;
+                    }
+
+                    else {
+                        var startIndex = i;
+                        for (var j = 0; j < forString.length; j++) {
+                            if (curChar == forString.charAt(j)) {
+                                if (j == forString.length - 1) {
+                                    var open = "<span style='color:blue;background-color: yellow' currentID=" + currentID + ">";
+                                    var close = "</span>";
+
+                                    inString = [inString.slice(0, startIndex), open, inString.slice(startIndex)].join('');
+                                    var endIndex = startIndex + open.length + forString.length;
+                                    inString = [inString.slice(0, endIndex), close, inString.slice(endIndex)].join('');
+                                    res.results.push({
+                                        found: forString,
+                                        AtIndex: startIndex,
+                                        CurrentIndex: startIndex + open.length,
+                                        spanID: currentID
+                                    });
+                                    currentID++;
+                                    i = endIndex + close.length;
+                                }
+
+                                else {
+                                    i++;
+                                    curChar = inString.charAt(i);
+                                }
+                            }
+                            else {
+                                i++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            res.resultString = inString;
+
+        }
+
+        return inString;
+    }
 
     this.searchAndMarkText = function(forString, inString)
     {
@@ -70,7 +151,7 @@ util.regex = util.regex || function () {
         var stopStr = "";
         while (shouldStop == false)
         {
-            var obj = this.searchStringInStringTillFirstMatch(forString, inNewString)
+            var obj = this.searchStringInStringTillFirstMatchIgnoreTags(forString, inNewString)
             if (obj.length != 0)
             {
                 var index = obj[0].index;
@@ -130,6 +211,12 @@ util.regex = util.regex || function () {
   this.searchStringInStringTillFirstMatch = function (searchString, inString)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, null)
+      return this.executeSearchRegex(inString, regex);
+  }
+
+  this.searchStringInStringTillFirstMatchIgnoreTags = function(searchString, inString)
+  {
+      var regex = this.getRegexForSearchStringIgnoringTags(searchString, null);
       return this.executeSearchRegex(inString, regex);
   }
 
@@ -303,7 +390,9 @@ Rückgabewert ist der ersetze String
   */
   this.remvoeAllAttrFromString = function (str)
   {
+      str = str.replace(/<\/?[^>]*>/g, "");
 
+      return str;
   }
 
   /*
@@ -469,6 +558,30 @@ rückgabewert ist das regex Objekt
       }
 
       var retRegex = new RegExp(regString, attributes);
+      return retRegex;
+  }
+
+  this.getRegexForSearchStringIgnoringTags = function(searchString, attributes)
+  {
+      var regString = "";
+      for(var i = 0; i < searchString.length; i++)
+      {
+          var curChar = searchString.charAt(i);
+          regString += curChar;
+          if (i < searchString.length + 1)
+          {
+              regString += "?[<[^>]*>]";
+          }
+          
+      }
+
+      if (attributes == null)
+      {
+          attributes = "i";
+      }
+
+      var retRegex = new RegExp(regString, attributes);
+
       return retRegex;
   }
 

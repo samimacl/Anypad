@@ -19,15 +19,24 @@
     <script src="regex.js"></script>
     <script>
 
-        var tmpUtil = new util.regex();
 
 
         function searchAndMark() {
-            var text = document.getElementById("searchArea").value;
-            var search = document.getElementById("searchfield").value;
-            var idk = tmpUtil.searchAndMarkText(search, text);
+            this.tmpUtil = new util.regex();
+
+            //var text = document.getElementById("searchArea").value;
+            //var search = document.getElementById("searchfield").value;
+            var text = "h<span style='color:blue;background-color: yellow' currentid='0'>ell</span>o <ell><br>hello <ell></ell></ell>";
+            var search = "REPL";
+            document.write("<br/>searchText: <br/>");
+            document.write(text);
+            document.write("<br/>replaceText: <br/>");
+            document.write(search);
+            var idk = this.tmpUtil.replaceStringAtID(0, search, text);
+            document.write("<br/>resultText <br/>");
             document.write(idk);
-            var withoutSpans = tmpUtil.removeSpanWithAttributes(idk);
+            var withoutSpans = this.tmpUtil.removeSpanWithAttributes(idk);
+            document.write("<br/>withoutSpans");
             document.write("<br />");
             document.write(withoutSpans);
 
