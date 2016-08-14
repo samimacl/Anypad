@@ -172,7 +172,7 @@ var core = core || {};
       }
       else{
         $(".replace").css("display","table-cell");
-        result = regex.searchAndMarkText(searchString, innerHTML);
+        result = regex.searchAndMarkTextIgnoringTags(searchString, innerHTML);
       }
       if (result !== "") {
         self.writeHTML( result, false );

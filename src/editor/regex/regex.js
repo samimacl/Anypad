@@ -69,10 +69,12 @@ util.regex = util.regex || function () {
     this.searchAndMarkTextIgnoringTags = function (forString, inString)
     {
         inString = this.removeSpanWithAttributes(inString);
-        var check = this.searchStringInStringTillFirstMatch(inString);
+        var check = this.searchStringInStringTillFirstMatch(forString, inString);
         
         if (check.length != 0) {
             var tagOpened = false;
+            var tagIsDiv = false;
+
             var res = {
                 search: forString,
                 default: inString,
