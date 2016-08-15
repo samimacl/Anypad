@@ -169,7 +169,7 @@ var core = core || {};
 
       if(searchString.length == 0){
         $(".replace").hide();
-        $("#replace_input").val(" ");
+        $("#replace_input").val("");
         result = regex.removeSpanWithAttributes(innerHTML);
       }
       else{
@@ -199,6 +199,7 @@ var core = core || {};
          var output = regex.replaceAllIdsInString(replaceString, currentSearch);
          self.writeHTML(output, false);
          this.repeatSearch();
+         $("#replace_input").val(""); 
       }
     };
 
