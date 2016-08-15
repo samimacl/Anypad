@@ -116,7 +116,7 @@ var core = core || {};
         } else if (id == "import") {
           anypad.openFile();
         } else if (id == "replace") {
-          var text = document.getElementById("replace_input").innerText;
+          var text = $("#replace_input").val();
           anypad.replaceAll(text);
         } 
         else {}
