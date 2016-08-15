@@ -92,3 +92,7 @@ and open the template in the editor.
 #matches{
     background-color: #1DAB1F;
 }
+
+#bPrint{
+    margin-left: 2em;
+}
