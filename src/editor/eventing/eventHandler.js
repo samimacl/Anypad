@@ -43,6 +43,7 @@ var core = core || {};
             /* LineBreak; keyCode 13: Enter shiftKey 1: gedrückt gehalten */
             var createLineBreak = (event.keyCode == 13 && !event.shiftKey == 1);
             anypad.writeHTML( html, createLineBreak );
+            //anypad.repeatSearch(); 
           }
         }, false);
 

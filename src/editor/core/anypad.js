@@ -17,6 +17,7 @@ var core = core || {};
     var storage = new util.storage();
     var print = new util.print();
     var regex = new util.regex();
+    var currentSearch = "";
 
     /**
     * Gibt die private variable htmlparser zurück.
@@ -132,6 +133,7 @@ var core = core || {};
     */
     this.openPrintDialog = function () {
       var innerHTML = htmlparser.getHTML();
+      innerHTML = regex.removeSpanWithAttributes(innerHTML);
       print.doPrint( innerHTML );
     };
 
@@ -162,22 +164,28 @@ var core = core || {};
     * @param {string} searchstring - String, nach dem gesucht werden soll
     */
     this.search = function (searchString) {
+      currentSearch = searchString;
       var innerHTML = htmlparser.getHTML();
-      console.log(innerHTML);
       var result;
 
       if(searchString.length == 0){
-        $(".replace").hide();  
+        $(".replace").hide();
         result = regex.removeSpanWithAttributes(innerHTML);
       }
       else{
         $(".replace").css("display","table-cell");
-        var res = regex.searchAndMarkTextIgnoringTags(searchString, innerHTML); 
+        var res = regex.searchAndMarkTextIgnoringTags(searchString, innerHTML);
         result = res.resultString;
       }
       if (result !== "") {
         self.writeHTML( result, false );
         self.updateContent();
+      }
+    };
+
+    this.repeatSearch = function () {
+      if (currentSearch.length > 0) {
+        self.search(currentSearch);
       }
     };
 
