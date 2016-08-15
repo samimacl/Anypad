@@ -6,7 +6,7 @@ var util = util || {};
  * @constructor
  */
 util.print = util.print || function () {
-  
+
   /**
    * Druckvorgang wird gestartet.
    * @param {string} innerHTML - Das zu druckende HTML
