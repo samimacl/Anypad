@@ -132,6 +132,8 @@ var core = core || {};
     * Öffnet Druckfunktionalität des Moduls print und übergibt innerHTML des Editors.
     */
     this.openPrintDialog = function () {
+      //Ist dafür da, dass auch direkt nach dem Öffnen einer Datei diese gedruckt werden kann.
+      self.writeHTML( richTextField.contentWindow.document.body.innerHTML );
       var innerHTML = htmlparser.getHTML();
       innerHTML = regex.removeSpanWithAttributes(innerHTML);
       print.doPrint( innerHTML );
@@ -153,7 +155,6 @@ var core = core || {};
       storage.importJSON();
       var innerHMTL = richTextField.contentWindow.document.body.innerHMTL;
       if ( typeof(innerHMTL) !== "undefined") {
-        console.log(innerHMTL);
         self.writeHTML( innerHMTL );
       }
     };
