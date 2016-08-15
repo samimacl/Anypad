@@ -65,12 +65,28 @@ util.regex = util.regex || function () {
     */
     this.replaceStringAtID = function(ID, replaceString, inString)
     {
-        var regexString = "<\/?span[^>]*id=" + "'" + ID + "'" + ">" + "(.|\n)*?<\/span>";
+        var regexString = "<\/?span[^>]*id=" + ID + ">" + "(.|\n)*?<\/span>";
 
         var regex = new RegExp(regexString, "i");
         inString = inString.replace(regex, replaceString);
 
         return inString;
+    }
+
+    this.replaceAllIdsInString = function(replaceString, resObject)
+    {
+        var str = resObject.resultString;
+        var entr = resObject.results;
+        if (entr.length != 0)
+        {
+            for (var i = 0; i < entr.length; i++)
+            {
+                var cur = entr[i];
+                str = this.replaceStringAtID(cur.spanID, replaceString, str);
+            }
+        }
+
+        return str; 
     }
 
     /**
@@ -121,7 +137,8 @@ util.regex = util.regex || function () {
                         for (var j = 0; j < forString.length; j++) {
                             if (curChar == forString.charAt(j).toLowerCase()) {
                                 if (j == forString.length - 1) {
-                                    var open = "<span style='color:blue;background-color: yellow' id=" + "searchRes " + currentID + ">";
+                                    var idString = "searchRes" + currentID;
+                                    var open = "<span style='color:blue;background-color: yellow' id=" + idString + ">";
                                     var close = "</span>";
 
                                     inString = [inString.slice(0, startIndex), open, inString.slice(startIndex)].join('');
@@ -131,7 +148,7 @@ util.regex = util.regex || function () {
                                         found: forString,
                                         AtIndex: startIndex,
                                         CurrentIndex: startIndex + open.length,
-                                        spanID: currentID
+                                        spanID: idString
                                     });
                                     currentID++;
                                     i = endIndex + close.length;

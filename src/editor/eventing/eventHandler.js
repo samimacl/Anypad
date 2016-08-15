@@ -115,9 +115,11 @@ var core = core || {};
           anypad.saveFile();
         } else if (id == "import") {
           anypad.openFile();
-        } else {
-          anypad.simpleCommand(commands[id-1], id);
-        }
+        } else if (id == "replace") {
+          var text = document.getElementById("replace_input").innerText;
+          anypad.replaceAll(text);
+        } 
+        else {}
         //damit Änderungen in Editor geladen werden.
         anypad.updateContent();
       };

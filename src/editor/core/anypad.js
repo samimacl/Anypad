@@ -17,7 +17,7 @@ var core = core || {};
     var storage = new util.storage();
     var print = new util.print();
     var regex = new util.regex();
-    var currentSearch = "";
+    var currentSearch = {};
 
     /**
     * Gibt die private variable htmlparser zurück.
@@ -164,7 +164,6 @@ var core = core || {};
     * @param {string} searchstring - String, nach dem gesucht werden soll
     */
     this.search = function (searchString) {
-      currentSearch = searchString;
       var innerHTML = htmlparser.getHTML();
       var result;
 
@@ -177,11 +176,12 @@ var core = core || {};
         $(".replace").css("display","table-cell");
         var res = regex.searchAndMarkTextIgnoringTags(searchString, innerHTML);
         var matchCount = res.results.length;
-        result = res.resultString;
+        result = res;
+        currentSearch = res;
         $("#matches").text(matchCount);
       }
-      if (result !== "") {
-        self.writeHTML( result, false );
+      if (result.resultString !== "") {
+        self.writeHTML( result.resultString, false );
         self.updateContent();
       }
     };
@@ -189,6 +189,16 @@ var core = core || {};
     this.repeatSearch = function () {
       if (currentSearch.length > 0) {
         self.search(currentSearch);
+      }
+    };
+
+    this.replaceAll = function(replaceString)
+    {
+      if (currentSearch != null)
+      {
+         var output = regex.replaceAllIdsInString(replaceString, currentSearch);
+         self.writeHTML(output, false);
+         this.repeatSearch();
       }
     };
 
