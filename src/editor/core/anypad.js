@@ -170,12 +170,15 @@ var core = core || {};
 
       if(searchString.length == 0){
         $(".replace").hide();
+        $("#replace_input").val(" ");
         result = regex.removeSpanWithAttributes(innerHTML);
       }
       else{
         $(".replace").css("display","table-cell");
         var res = regex.searchAndMarkTextIgnoringTags(searchString, innerHTML);
+        var matchCount = res.results.length;
         result = res.resultString;
+        $("#matches").text(matchCount);
       }
       if (result !== "") {
         self.writeHTML( result, false );

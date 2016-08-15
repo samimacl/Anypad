@@ -45,6 +45,7 @@ util.regex = util.regex || function () {
     *   Rückgabewert ist der veränderte string
     *   @param {string} str - Der zu bearbeitende String
     *   @param {string} attr - Die Attribute für den Span
+    *   @return string - der bearbeitete String
     **/
     this.addSpanWithAttributesToString = function(str, attr)
     {
@@ -55,13 +56,12 @@ util.regex = util.regex || function () {
     }
 
 
-    /** Text (inString) wird durchsucht und die gefundenen Ergebnisse werden markiert
-    *   es wird ein replaceString gebildet (repl), welcher aus dem searchString (forString) besteht, eingeschlossen von HTML Tags (repl)
-    *   sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
-    *   rückgabewert ist der markierte text
+    /** 
+    *   Der komplette Span, welcher die ID aufweißt, wird durch den replaceString ersetzt
     *   @param {string} ID - Die im Span gesetzte ID
-    *   @param {string} replaceString - der Neue String
-    *   @param {string} str - Der zu bearbeitende String
+    *   @param {string} replaceString - der Neue String mit dem ersetzt werden soll
+    *   @param {string} inString - Der zu bearbeitende String
+    *   @return {string} - Der bearbeitete String
     */
     this.replaceStringAtID = function(ID, replaceString, inString)
     {
@@ -73,6 +73,14 @@ util.regex = util.regex || function () {
         return inString;
     }
 
+    /**
+     * string wird anhand eines Suchworts durchsucht und die Ergebnisse im String durch Spans farbig markiert.
+     * Zusätzlich wird den Ergebnissen eine ID zugeordnet, über die später leichter zugegriffen werden kann, um die entsprechenden
+     * Ergebnisse zu ersetzen. Tags werden hierbei ignoriert und nicht durchsucht.
+     * @param {string} forString - der zu suchende String
+     * @param {string} inString - der zu durchsuchende String
+     * @return {object} - ein Objekt mit notwendigen Infos für ein search and replace
+     */
     this.searchAndMarkTextIgnoringTags = function (forString, inString)
     {
         inString = this.removeSpanWithAttributes(inString);
@@ -151,6 +159,14 @@ util.regex = util.regex || function () {
         return res;
     }
 
+     /**
+     * string wird anhand eines Suchworts durchsucht und die Ergebnisse im String durch Spans farbig markiert.
+     * Zusätzlich wird den Ergebnissen eine ID zugeordnet, über die später leichter zugegriffen werden kann, um die entsprechenden
+     * Ergebnisse zu ersetzen.
+     * @param {string} forString - der zu suchende String
+     * @param {string} inString - der zu durchsuchende String
+     * @return {string} - der bearbeitete String
+     */
     this.searchAndMarkText = function(forString, inString)
     {
 
@@ -167,7 +183,7 @@ util.regex = util.regex || function () {
             if (obj.length != 0)
             {
                 var index = obj[0].index;
-                var spanAttr = "style='color:blue;background-color: yellow' currentID=" + currentID;
+                var spanAttr = "style='color:blue;background-color: yellow' id=" + currentID;
                 var repl = this.addSpanWithAttributesToString(obj[0].found, spanAttr);
                 var nextIndex = index + repl.length;
                 inNewString = this.replaceStringInStringAtIndex(forString, repl, inNewString, index);
@@ -193,9 +209,15 @@ util.regex = util.regex || function () {
         return finalString;
     }
 
-    //kompletter Text (inString) kann nach einem Schlüsselwort (searchString) durchsucht
-    //hierbei können attribute für die Regex klasse mitgegeben werden (attributes), attribute sind zum Beispiel "gi" für global und case insensitive
-    //Rückgabewert ist ein Array aus Objekten [{found:String, index:int}] mit Informationen über das gefundene Objekt und dem Index an dem es im Text gefunden wurde
+    /**
+    *   kompletter Text (inString) kann nach einem Schlüsselwort (searchString) durchsucht
+    *   hierbei können attribute für die Regex klasse mitgegeben werden (attributes), attribute sind zum Beispiel "gi" für global und case insensitive
+    *   Rückgabewert ist ein Array aus Objekten [{found:String, index:int}] mit Informationen über das gefundene Objekt und dem Index an dem es im Text gefunden wurde
+    *   @param {string} searchString - der zu suchende String
+    *   @param {string} inString - der String in dem gesucht werden soll
+    *   @param {string} attributes - die Attribute für Regex
+    *   @return {}
+    */
   this.searchStringInString = function(searchString, inString, attributes)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, attributes)
@@ -203,8 +225,15 @@ util.regex = util.regex || function () {
       return this.executeSearchRegex(inString, regex);
   }
 
-  //wie "seachStringInString", suche beginnt aber erst ab einem bestimmten Index
-  //hierfür wird das Object inString abgeschnitten und ein Substring beginnend vom Index gebildet, es wird nur  der substring durchsucht
+    /**
+    *   wie "seachStringInString", suche beginnt aber erst ab einem bestimmten Index
+    *   hierfür wird das Object inString abgeschnitten und ein Substring beginnend vom Index gebildet, es wird nur  der substring durchsucht
+    *   @param {string} searchString - der zu suchende String
+    *   @param {string} beginningAtIndex - der index ab dem gesucht werden soll
+    *   @param {string} inString - der zu durchsuchende String
+    *   @param {string} attributes - die Attribute für Regex
+    *   @return {[{index:int, found:string}}]} - ein Array mit den gefunden Ergebnissen
+    */
   this.searchStringInStringBeginningAtIndex = function (searchString, beginningAtIndex, inString, attributes)
   {
       searchString = this.searchString.substring(beginningAtIndex);
@@ -212,40 +241,54 @@ util.regex = util.regex || function () {
       return this.executeSearchRegex(inString, regex);
   }
 
-  //wie searchStringInString, allerdings sind die Attribute vordefiniert und der String wird Case Insensitive durchsucht
+    /**
+    *   wie searchStringInString, allerdings sind die Attribute vordefiniert und der String wird Case Insensitive durchsucht
+    *   @param {string} searchString - der zu suchende String
+    *   @param {string} inString - der zu durchsuchende String
+    *   @return {[{index:int, found:string}}]} - ein Array mit den gefunden Ergebnissen
+    */
   this.searchStringInStringCaseInSensitive = function (searchString, inString)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, "g")
       return this.executeSearchRegex(inString, regex);
   }
 
-  //wie searchStringInString, allerdings sind die Attribute vordefiniert und der String wird nicht global durchsucht, es wird also nur bis zum ersten Ergebniss gesucht und dieses zurückgegeben
+  /**
+  *   wie searchStringInString, allerdings sind die Attribute vordefiniert und der String wird nicht global durchsucht, es wird also nur bis zum ersten Ergebniss gesucht und dieses zurückgegeben
+  *   @param {string} searchString - der zu suchende String
+  *   @param {string} inString - der zu durchsuchende String
+  *   @return {[{index:int, found:string}}]} - ein Array mit den gefunden Ergebnissen
+  */
   this.searchStringInStringTillFirstMatch = function (searchString, inString)
   {
       var regex = this.getRegexForSearchString(searchString, null, null, "i")
       return this.executeSearchRegex(inString, regex);
   }
 
+  /**
+  *   wie searchStringInStringTillFirstMatch, allerdings werden HTML Tags ignoriert
+  *   @param {string} searchString - der zu suchende String
+  *   @param {string} inString - der zu durchsuchende String
+  *   @return {[{index:int, found:string}}]} - ein Array mit den gefunden Ergebnissen
+  */
   this.searchStringInStringTillFirstMatchIgnoreTags = function(searchString, inString)
   {
       var regex = this.getRegexForSearchStringIgnoringTags(searchString, "i");
       return this.executeSearchRegex(inString, regex);
   }
 
-  /*
-  kompletter string (inString) wird durchsucht (searchString) und alle Ergebnisse werden ersetzt durch replaceString
-  Suchen und ersetzen geschieht mittels Regex
-  Rückgabewert: 
+  /**
+  *   kompletter string (inString) wird durchsucht (searchString) und alle Ergebnisse werden ersetzt durch replaceString
+  *   Suchen und ersetzen geschieht mittels Regex
+  *   @param {string} searchString - der zu suchende String
+  *   @param {string} inString - der zu durchsuchende String
+  *   @param {string} replaceString - der zu setzende String
+  *   @return {object} - ein object 
   {
-      replaced:[{found:string, index:int}] //Array aus Objekten mit Informationen über die gefunden Inhalte
-      result:string //der ersetzte String
+      replaced:{[{found:string, index:int}]} //Array aus Objekten mit Informationen über die gefunden Inhalte
+      result:{string} //der ersetzte String
   }
   */
-  this.searchAllSpans = function(inString)
-  {
-      var regexA = new RegExp();
-  }
-
   this.replaceStringInString = function (searchString,replaceString, inString)
   {
       var regexA = this.getRegexForSearchString(searchString, null,null, "gi");
@@ -265,9 +308,13 @@ util.regex = util.regex || function () {
   }
 
 /* 
-wie replaceStringInString, allerdings wird nur ein Ergebniss ersetzt, welches durch den Index definiert wird
-hierfür wird idr zuerst eine suche ausgeführt
-Rückgabewert ist der ersetze String
+*   wie replaceStringInString, allerdings wird nur ein Ergebniss ersetzt, welches durch den Index definiert wird
+*   hierfür wird idr zuerst eine suche ausgeführt
+*   @param {string} searchString - der zu suchende String
+*   @param {string} replaceString - der zu setzende String
+*   @param {string} inString - der zu durchsuchende String
+*   @param {string} AtIndex - der Index an dem ersetzt werden soll
+*   @return {string} - der ersetzte String
 */
     this.replaceStringInStringAtIndex = function (searchString, replaceString, inString, AtIndex)
   {
@@ -282,8 +329,9 @@ Rückgabewert ist der ersetze String
   //Art
 
   /*
-  string wird von html bold tags umschlossen
-  Rückgabewert ist der umschlossene String
+  * string wird von html bold tags umschlossen
+  * @param{string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.makeStringFat = function (str)
   {
@@ -291,8 +339,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  string wird von html italic tags umschlossen
-  Rückgabewert ist der umschlossene String
+  * string wird von html italic tags umschlossen
+  * @param{string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.makeStringKursiv = function (str)
   {
@@ -300,8 +349,10 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  string wird von html underlined tags umschlossen
-  Rückgabewert ist der umschlossene String
+  * string wird von html underlined tags umschlossen
+  * Rückgabewert ist der umschlossene String
+  * @param{string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.makeStringUnderlined = function (str)
   {
@@ -309,8 +360,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  Überprüfung ob string (str) bold ist, es wird eine Überprüfung auf die <b> Tags ausgeführt
-  Rückgabewert ist ein bool
+  * Überprüfung ob string (str) bold ist, es wird eine Überprüfung auf die <b> Tags ausgeführt
+  * @param{string} str - der zu überprüfende String
+  * @return {bool} - bool ob String das Attribut aufweist oder nicht
   */
   this.stringIsFat = function (str)
   {
@@ -330,8 +382,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  Überprüfung ob string (str) italic ist, es wird eine Überprüfung auf die <i> Tags ausgeführt
-  Rückgabewert ist ein bool
+  * Überprüfung ob string (str) italic ist, es wird eine Überprüfung auf die <i> Tags ausgeführt
+  * @param{string} str - der zu überprüfende String
+  * @return {bool} - bool ob String das Attribut aufweist oder nicht
   */
   this.stringIsKursiv = function (str)
   {
@@ -352,8 +405,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  Überprüfung ob string (str) underlined ist, es wird eine Überprüfung auf die <u> Tags ausgeführt
-  Rückgabewert ist ein bool
+  * Überprüfung ob string (str) underlined ist, es wird eine Überprüfung auf die <u> Tags ausgeführt
+  * @param{string} str - der zu überprüfende String
+  * @return {bool} - bool ob String das Attribut aufweist oder nicht
   */
   this.stringIsUnderlined = function (str)
   {
@@ -374,8 +428,11 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  Überprüfung ob string (str) bestimmte Tags enthält, es kann sowohl ein openTag als auch ein closingTag durchgeführt werden
-  Rückgabewert ist ein bool
+  * Überprüfung ob string (str) bestimmte Tags enthält, es kann sowohl ein openTag als auch ein closingTag durchgeführt werden
+  * @param{string} str - der zu überprüfende String
+  * @param(string) opentag - der Tag am Anfang
+  * @param(string) closingTag - der Tag am Ende
+  * @return {bool} - bool ob String die Attribute aufweist oder nicht
   */
   this.stringHasTags = function(str, opentag, closingTag)
   {
@@ -396,9 +453,10 @@ Rückgabewert ist der ersetze String
       return false;
   }
 
-
-    /*
-    unused
+  /**
+  * Alle Tags werden vom String entfernt
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.remvoeAllAttrFromString = function (str)
   {
@@ -408,7 +466,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  bold (<b>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * bold (<b>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.removeFatAttrFromString = function (str)
   {
@@ -416,7 +476,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  italic (<i>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * italic (<i>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.removeKursivAttrFromString = function (str)
   {
@@ -424,15 +486,19 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  underlined (<u>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * underlined (<u>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.removeUnderLinedFromString = function (str)
   {
       return this.removeTagsFromString(str, "<u>", "</u>");
   }
 
-    /*
-    Opening(openingTag) und ClosingTag(closingTag) können zu string (str) hinzugefügt werden. Rückgabewert ist der umschlossene String
+  /**
+  * Opening(openingTag) und ClosingTag(closingTag) können zu string (str) hinzugefügt werden. Rückgabewert ist der umschlossene String
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.addTagsToString = function (str, openingTag, closingTag)
   {
@@ -440,8 +506,9 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  String wird durch einen Regulären Ausdruck auf HTML Tags durchsucht.
-  rückgabewert sind alle gefundenen tags [{found:string, index:int}]
+  * String wird durch einen Regulären Ausdruck auf HTML Tags durchsucht.
+  * @param {string} str - der zu durchsuchende String
+  * @return {[{found:string, index:int}]} - die gefundenen Ergebnisse
   */
   this.getTagsFromString = function (str)
   {
@@ -451,9 +518,13 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  opening (opentag) und closingTag (closingTag) können von einem string(str) entfernt werden, sofern sie vorhandend sind
-  Es werden nur der erste und der letzte gefundene Tag entfernt
-  Rückgabewert ist der String ohne die entsprechenden Tags
+  * opening (opentag) und closingTag (closingTag) können von einem string(str) entfernt werden, sofern sie vorhandend sind
+  * Es werden nur der erste und der letzte gefundene Tag entfernt
+  * Rückgabewert ist der String ohne die entsprechenden Tags
+  * @param {string} str - der zu bearbeitende String
+  * @param {string} opentag - der zu entfernende Tag
+  * @param {string} closingTag - der zu entferende Tag
+  * @return {string} der bearbeitete String
   */
   this.removeTagsFromString = function (str, opentag, closingTag)
   {
@@ -463,9 +534,12 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  openingTag (opentag) kann von einem string(str) entfernt werden, sofern er vorhandend ist
-  Es wird nur der erste Tag entfernt
-  Rückgabewert ist der String ohne den entsprechenden Tag
+  * openingTag (opentag) kann von einem string(str) entfernt werden, sofern er vorhandend ist
+  * Es wird nur der erste Tag entfernt
+  * Rückgabewert ist der String ohne den entsprechenden Tag
+  * @param {string} str - der zu bearbeitende String
+  * @param {string} tag - der zu entfernende Tag
+  * @return {string} der bearbeitete String
   */
   this.removeOpeningTag = function (str, tag)
   {
@@ -481,9 +555,12 @@ Rückgabewert ist der ersetze String
   }
 
   /*
-  closingtag (closingtag) kann von einem string(str) entfernt werden, sofern er vorhandend ist
-  Es wird nur der letzte Tag entfernt
-  Rückgabewert ist der String ohne den entsprechenden Tag
+  * closingtag (closingtag) kann von einem string(str) entfernt werden, sofern er vorhandend ist
+  * Es wird nur der letzte Tag entfernt
+  * Rückgabewert ist der String ohne den entsprechenden Tag
+  * @param {string} str - der zu bearbeitende String
+  * @param {string} tag - der zu entferende Tag
+  * @return {string} der bearbeitete String
   */
   this.removeClosingTag = function (str, tag)
   {
@@ -502,8 +579,10 @@ Rückgabewert ist der ersetze String
 
   
   /*
-  string (str) wird per regex auf span tags durchsucht, span tags werden entfernt
-  rückgabewert ist ein string ohne die entsprechende Tags
+  * string (str) wird per regex auf span tags durchsucht, span tags werden entfernt
+  * rückgabewert ist ein string ohne die entsprechende Tags
+  * @param {string} str - der zu bearbeitende String
+  * @return {string} - der bearbeitete String
   */
   this.removeSpanWithAttributes = function(str)
   {
@@ -511,11 +590,16 @@ Rückgabewert ist der ersetze String
 
       return str;
   }
+
   //Helper
 
-  /*search Regex (regex) wird auf zu durchsuchenden string (text) ausgeführt
-  Rückgabewert ist ein Array aus Objekten, welche Informationen über die gefundenen Objecte beinhaltent [{found:string,index:int}] 
-*/
+  /*
+  * search Regex (regex) wird auf zu durchsuchenden string (text) ausgeführt
+  * ückgabewert ist ein Array aus Objekten, welche Informationen über die gefundenen Objecte beinhaltent [{found:string,index:int}]
+  * @param {string} text - der zu durchsuchende Text
+  * @param {RegExp} regex - das anzuwendene Regex Object
+  * @return {[{found:string,index:int}]} - die gefundenen Ergebnisse 
+  */
     this.executeSearchRegex = function (text, regex) {
       if (regex.constructor !== RegExp) {
           throw new Error('not RegExp');
@@ -544,10 +628,15 @@ Rückgabewert ist der ersetze String
   }
 
 /*
-regex wird gebildet aus zu suchendem String (searchString) 
-es können attribute zum durchsuchen mitgegeben werden (attributes)
-zusätzliche kann ein opening und closingtag angefügt werden
-rückgabewert ist das regex Objekt
+*   regex wird gebildet aus zu suchendem String (searchString) 
+*   es können attribute zum durchsuchen mitgegeben werden (attributes)
+*   zusätzliche kann ein opening und closingtag angefügt werden
+*   rückgabewert ist das regex Objekt
+*   @param {string} searchString - der zu suchende String
+*   @param {string} openTag - der Tag am Anfang
+*   @param {string} closingTag - der Tag am Ende
+*   @param {string} attributes - die Attribute für Regex
+*   @return {string} - das Regex Object
 */
   this.getRegexForSearchString = function (searchString, openingTag, closingTag, attributes)
   {
@@ -573,6 +662,15 @@ rückgabewert ist das regex Objekt
       return retRegex;
   }
 
+/*
+*   regex wird gebildet aus zu suchendem String (searchString) 
+*   html Tags werden dabei ignoriert
+*   es können attribute zum durchsuchen mitgegeben werden (attributes)
+*   rückgabewert ist das regex Objekt
+*   @param {string} searchString - der zu suchende String
+*   @param {string} attributes - die Attribute für Regex
+*   @return {string} - das Regex Object
+*/
   this.getRegexForSearchStringIgnoringTags = function(searchString, attributes)
   {
       var regString = "";
@@ -597,6 +695,12 @@ rückgabewert ist das regex Objekt
       return retRegex;
   }
 
+/**
+ * Methode zum splitten eines Strings an einem Index
+ * @param {string} str - der zu splittende String
+ * @param {int} index - die Stelle an der der String gesplittet werden soll
+ * @return {[string]} - Array mit beiden gesplitteten Teilen
+ */
   this.splitString = function (str, index) {
         return [str.substring(0, index), str.substring(index)];
     }
