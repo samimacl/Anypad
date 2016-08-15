@@ -44,7 +44,7 @@ and open the template in the editor.
 #dl{
     display: none;
 }
-#red_color{
+.red_color{
     color: red;
 }
 .black_color{
@@ -72,7 +72,7 @@ and open the template in the editor.
     color: silver;
 }
 .snow_color{
-    color: snow;
+    color: green;
 }
 
 .dropdown:hover .ulcs{
