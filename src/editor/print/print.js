@@ -15,6 +15,7 @@ util.print = util.print || function () {
     var printwindow = window.open();
     try {
       printwindow.document.write( innerHTML );
+      printwindow.document.close();
       printwindow.print();
     }
     catch(err) {
