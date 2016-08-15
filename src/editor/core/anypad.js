@@ -205,5 +205,6 @@ var core = core || {};
     self.initialize();
     $('#5').dropdown();
     $('#4').dropdown();
+    $("#searchfield").val("");
   };
 } )();
