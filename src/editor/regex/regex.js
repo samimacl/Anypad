@@ -58,7 +58,7 @@ util.regex = util.regex || function () {
 
     this.replaceStringAtID = function(ID, replaceString, inString)
     {
-        var regexString = "<\/?span[^>]*currentID=" + "'" + ID + "'" + ">" + "(.|\n)*?<\/span>";
+        var regexString = "<\/?span[^>]*id=" + "'" + ID + "'" + ">" + "(.|\n)*?<\/span>";
 
         var regex = new RegExp(regexString, "i");
         inString = inString.replace(regex, replaceString);
@@ -71,20 +71,22 @@ util.regex = util.regex || function () {
         inString = this.removeSpanWithAttributes(inString);
         var check = this.searchStringInStringTillFirstMatch(forString, inString);
         
+        var res = {
+            search: forString,
+            default: inString,
+            results: []
+        };
+
         if (check.length != 0) {
             var tagOpened = false;
             var tagIsDiv = false;
 
-            var res = {
-                search: forString,
-                default: inString,
-                results: []
-            };
+
 
             var currentID = 0;
 
             for (var i = 0; i < inString.length;) {
-                var curChar = inString.charAt(i);
+                var curChar = inString.charAt(i).toLowerCase();
                 if (tagOpened) {
                     if (curChar == '>') {
                         tagOpened = false;
@@ -102,9 +104,9 @@ util.regex = util.regex || function () {
                     else {
                         var startIndex = i;
                         for (var j = 0; j < forString.length; j++) {
-                            if (curChar == forString.charAt(j)) {
+                            if (curChar == forString.charAt(j).toLowerCase()) {
                                 if (j == forString.length - 1) {
-                                    var open = "<span style='color:blue;background-color: yellow' currentID=" + currentID + ">";
+                                    var open = "<span style='color:blue;background-color: yellow' id=" + "searchRes " + currentID + ">";
                                     var close = "</span>";
 
                                     inString = [inString.slice(0, startIndex), open, inString.slice(startIndex)].join('');
@@ -122,7 +124,7 @@ util.regex = util.regex || function () {
 
                                 else {
                                     i++;
-                                    curChar = inString.charAt(i);
+                                    curChar = inString.charAt(i).toLowerCase();
                                 }
                             }
                             else {
@@ -134,11 +136,12 @@ util.regex = util.regex || function () {
                 }
             }
 
-            res.resultString = inString;
 
         }
 
-        return inString;
+        res.resultString = inString;
+
+        return res;
     }
 
     this.searchAndMarkText = function(forString, inString)
@@ -212,13 +215,13 @@ util.regex = util.regex || function () {
   //wie searchStringInString, allerdings sind die Attribute vordefiniert und der String wird nicht global durchsucht, es wird also nur bis zum ersten Ergebniss gesucht und dieses zurückgegeben
   this.searchStringInStringTillFirstMatch = function (searchString, inString)
   {
-      var regex = this.getRegexForSearchString(searchString, null, null, null)
+      var regex = this.getRegexForSearchString(searchString, null, null, "i")
       return this.executeSearchRegex(inString, regex);
   }
 
   this.searchStringInStringTillFirstMatchIgnoreTags = function(searchString, inString)
   {
-      var regex = this.getRegexForSearchStringIgnoringTags(searchString, null);
+      var regex = this.getRegexForSearchStringIgnoringTags(searchString, "i");
       return this.executeSearchRegex(inString, regex);
   }
 
