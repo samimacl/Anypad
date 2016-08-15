@@ -38,10 +38,14 @@ util.regex = util.regex || function () {
     
     //REGEX
 
-    //span wird u.a. benötigt, um String verschiedene Attribute (attr) mitzugeben bspw. <p>My mother has <span style="color:blue">blue</span> eyes.</p>
-    //es wird also ein opening (var open) span tag gebildet mit den Attributen und ein closingtag (var close), der zu verwendene String (str) wird hier zwischen eingefügt
-    //Tags werden mit Methode addTagsToString angefügt
-    //Rückgabewert ist der veränderte string
+    /** 
+    *   span wird u.a. benötigt, um String verschiedene Attribute (attr) mitzugeben bspw. <p>My mother has <span style="color:blue">blue</span> eyes.</p>
+    *   es wird also ein opening (var open) span tag gebildet mit den Attributen und ein closingtag (var close), der zu verwendene String (str) wird hier zwischen eingefügt
+    *   Tags werden mit Methode addTagsToString angefügt
+    *   Rückgabewert ist der veränderte string
+    *   @param {string} str - Der zu bearbeitende String
+    *   @param {string} attr - Die Attribute für den Span
+    **/
     this.addSpanWithAttributesToString = function(str, attr)
     {
         var open = "<span " + attr + ">";
@@ -51,11 +55,14 @@ util.regex = util.regex || function () {
     }
 
 
-    //Text (inString) wird durchsucht und die gefundenen Ergebnisse werden markiert
-    //es wird ein replaceString gebildet (repl), welcher aus dem searchString (forString) besteht, eingeschlossen von HTML Tags (repl)
-    //sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
-    //rückgabewert ist der markierte text
-
+    /** Text (inString) wird durchsucht und die gefundenen Ergebnisse werden markiert
+    *   es wird ein replaceString gebildet (repl), welcher aus dem searchString (forString) besteht, eingeschlossen von HTML Tags (repl)
+    *   sämtliche gefundenen Inhalte im Text werden schließlich durch replaceStringInString durch die markierten Inhalte ersetzt
+    *   rückgabewert ist der markierte text
+    *   @param {string} ID - Die im Span gesetzte ID
+    *   @param {string} replaceString - der Neue String
+    *   @param {string} str - Der zu bearbeitende String
+    */
     this.replaceStringAtID = function(ID, replaceString, inString)
     {
         var regexString = "<\/?span[^>]*id=" + "'" + ID + "'" + ">" + "(.|\n)*?<\/span>";
