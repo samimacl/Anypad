@@ -46,7 +46,7 @@ var core = core || {};
             var pos = anypad.getCaretCharacterOffsetWithin();
             console.log(pos);
           //  anypad.repeatSearch();
-          //  anypad.setCaretPosition(pos);
+            anypad.setCaretToPos(richTextField.contentWindow.document.getElementById("contentBody"), pos);
           }
         }, false);
 

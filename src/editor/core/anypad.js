@@ -245,15 +245,17 @@ var core = core || {};
     };
 
     this.setCaretPosition = function( caretPosition ) {
-      var el = richTextField.contentWindow.document.body
-      var node = el.querySelector("BODY");
-      node.focus();
-      var range = richTextField.contentWindow.document.createRange();
-      range.setStart(node, caretPosition);
-      range.setEnd(node, caretPosition);
-      var sel = richTextField.contentWindow.document.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
+      var editor = richTextField.contentWindow.document.getElementById("contentBody");
+      if (typeof(editor) !== "undefined" && editor !== null) {
+        var range = richTextField.contentWindow.document.createRange();
+        //if (range.length >= caretPosition) {
+          range.setStart(editor, caretPosition);
+          range.setEnd(editor, caretPosition);
+          var sel = richTextField.contentWindow.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+      //  }
+      }
     }
 
     self.initialize();
