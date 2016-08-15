@@ -187,8 +187,8 @@ var core = core || {};
     };
 
     this.repeatSearch = function () {
-      if (currentSearch.length > 0) {
-        self.search(currentSearch);
+      if (currentSearch.search.length > 0) {
+        self.search(currentSearch.search);
       }
     };
 
