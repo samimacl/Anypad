@@ -33,20 +33,7 @@ core.htmlparser = core.htmlparser || function () {
   * @param {string} text - HTML, was geschrieben werden soll
   */
   this.write = function (text) {
-    text = buildHyphenate( text );
     output = text;
-  };
-
-  /*
-  * T E S T
-  */
-  var buildHyphenate = function ( rawHTML ) {
-    var resultObj = regex.replaceStringInString('<div', '<div class="hyphenate" lang="de" ', rawHTML);
-    if (resultObj.result !== '') {
-      rawHTML = resultObj.result;
-    }
-
-    return rawHTML;
   };
 
   /**
