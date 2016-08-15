@@ -36,19 +36,22 @@ var core = core || {};
       var initEvents = function () {
         richTextField.contentWindow.document.addEventListener('keyup', function(event) {
           var html = richTextField.contentWindow.document.body.innerHTML;
+          /* keyCode 8: Delete */
           if ( event.keyCode == 8 && html == anypad.getHtmlparser().getHTMLDefault() || (html == '') || (html == '<br>')) {
             anypad.writeDefault();
           } else {
-            /* LineBreak */
+            /* LineBreak; keyCode 13: Enter shiftKey 1: gedrückt gehalten */
             var createLineBreak = (event.keyCode == 13 && !event.shiftKey == 1);
             anypad.writeHTML( html, createLineBreak );
           }
         }, false);
 
+        /* Zuerst werden alle Buttons gesucht, die innerhalb des DIV-Tags wysiwyg_cp sind. Anschließend daran analog dazu die Li-Tags.*/
         var childrenButton = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('button'), 0);
         var childrenLi = [].slice.call(document.getElementById("wysiwyg_cp").getElementsByTagName('Li'), 0);
         var elements = new Array(childrenButton.concat(childrenLi));
         for (var i = 0; i < elements[0].length; i++) {
+          /* dynamisches Registrieren eines OnClick-Events auf alle im elements befindliche Buttons */
             elements[0][i].addEventListener('click', buttonOnClickDelegate(elements[0][i]), false);
         }
 
@@ -92,6 +95,10 @@ var core = core || {};
           if (linkURL != null) {
             anypad.iLink(commands[id-1], id, linkURL);
           }
+        } else if (id == 10) {
+          if (anypad.detectSelection('A')) {
+            anypad.simpleCommand(commands[id-1], id);
+          }
         } else if (id == 11) {
           var imgSrc = prompt('Enter image location', '');
             if (imgSrc != null){
@@ -100,7 +107,7 @@ var core = core || {};
         } else if (id >= 12 || id <= 15) {
           if (anypad.detectSelection('DIV')) {
             anypad.simpleCommand(commands[id-1], id);
-          };
+          }
         } else if (id == "bPrint") {
           anypad.openPrintDialog();
         } else if (id == "export") {

@@ -132,6 +132,13 @@ core.htmlparser = core.htmlparser || function () {
     }
   };
 
+/**
+* Erstellt Attribut mit Namen und Wert.
+* @param {string} tag - Tagname
+* @param {string} attribute - Name des Attributs
+* @param {string} value - Inhalt des Attributs
+* @return {string} elem - Zusammengesetztes Attribut
+*/
   var attribute = function (tag, attribute, value) {
     var elem = ' ' + attribute + '="' + value + '"';
     return tag.concat(elem);
