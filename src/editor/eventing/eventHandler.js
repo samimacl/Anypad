@@ -43,7 +43,10 @@ var core = core || {};
             /* LineBreak; keyCode 13: Enter shiftKey 1: gedrückt gehalten */
             var createLineBreak = (event.keyCode == 13 && !event.shiftKey == 1);
             anypad.writeHTML( html, createLineBreak );
-            //anypad.repeatSearch(); 
+            var pos = anypad.getCaretCharacterOffsetWithin();
+            console.log(pos);
+          //  anypad.repeatSearch();
+          //  anypad.setCaretPosition(pos);
           }
         }, false);
 
@@ -115,10 +118,12 @@ var core = core || {};
           anypad.saveFile();
         } else if (id == "import") {
           anypad.openFile();
+          var html = richTextField.contentWindow.document.body.innerHTML;
+          console.log(html);
         } else if (id == "replace") {
           var text = $("#replace_input").val();
           anypad.replaceAll(text);
-        } 
+        }
         else {}
         //damit Änderungen in Editor geladen werden.
         anypad.updateContent();
