@@ -1,7 +1,12 @@
 'use strict';
 
-describe('htmlparser Test', function () {
-    it('should be test createParagraph', function() {
-        expect(5+5).toBe(10);
+describe('core Test htmlparser', function() {
+    it('should be equal to HTML Default', function() {
+        var editor = document.getElementById('richTextField');
+        var htmlparser = new core.htmlparser(editor);
+
+        htmlparser.writeDefault();
+        var html = htmlparser.getHTML();
+        expect(html).toBe(html.getHTMLDefault());
     });
 });

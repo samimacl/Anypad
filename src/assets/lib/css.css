@@ -3,97 +3,89 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
+
+
 /*
     Created on : 02.08.2016, 10:28:30
     Author     : merktim
 */
-#wysiwyg_cp{
-	margin-left: 1%;
-        margin-right: 1% ;
 
+#wysiwyg_cp {
+    margin-left: 1%;
+    margin-right: 1%;
 }
-
-#header{
-	margin-left: 1%;
-        margin-right: 1%;
+#header {
+    margin-left: 1%;
+    margin-right: 1%;
 }
-
-#text_header{
-	margin-left: 48.5%;
+#text_header {
+    margin-left: 48.5%;
 }
-
-#logo{
-    height:60px;
+#logo {
+    height: 60px;
     width: 60px;
     position: static;
     margin-left: 50%;
 }
-
-#editor{
-	margin-left: 2%;
-        margin-right: 2%;
+#editor {
+    margin-left: 2%;
+    margin-right: 2%;
 }
-.ulcs{
+.ulcs {
     margin: -6px 0 0 12px;
 }
-
-#search{
-	float:left;
-        padding-left: 0px;
-        margin-top: 9px;
+#search {
+    float: left;
+    padding-left: 0px;
+    margin-top: 9px;
 }
-#dl{
+#dl {
     display: none;
 }
-.red_color{
+.red_color {
     color: red;
 }
-.black_color{
+.black_color {
     color: black;
 }
-.blue_color{
+.blue_color {
     color: blue;
 }
-.darkred_color{
+.darkred_color {
     color: darkred;
 }
-.gold_color{
+.gold_color {
     color: gold;
 }
-.lightblue_color{
+.lightblue_color {
     color: lightblue;
 }
-.orange_color{
+.orange_color {
     color: orange;
 }
-.pink_color{
+.pink_color {
     color: pink;
 }
-.silver_color{
+.silver_color {
     color: silver;
 }
-.snow_color{
+.snow_color {
     color: green;
 }
-
-.dropdown:hover .ulcs{
-    display:block;
+.dropdown:hover .ulcs {
+    display: block;
 }
-
 .br_enter {
-	display: block;
-	margin-top: 10px;
-	content: " ";
+    display: block;
+    margin-top: 10px;
+    content: " ";
 }
-
-.replace{
-    display: none;   
+.replace {
+    display: none;
 }
-
-#matches{
+#matches {
     background-color: #1DAB1F;
 }
-
-#bPrint{
+#bPrint {
     margin-left: 2em;
 }

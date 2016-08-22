@@ -1,4 +1,32 @@
-/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: regex/regex.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: regex/regex.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
 Verwendbare Methoden:
 
 //MARK Suche
@@ -12,9 +40,9 @@ replaceStringInString -> ersetzt alle Elemente im String
 replaceStringInStringAtIndex -> erstetzt Element am index
 
 //MARK Attribute
-stringIsFat -> überprüfung ob String <b> ist
-stringIsKursiv -> überprüfung ob String <i> ist
-stringIsUnderlined -> überprüfung ob String <u> ist
+stringIsFat -> überprüfung ob String &lt;b> ist
+stringIsKursiv -> überprüfung ob String &lt;i> ist
+stringIsUnderlined -> überprüfung ob String &lt;u> ist
 makeStringFat
 makeStringKursiv
 makeStringUnderlined
@@ -38,7 +66,7 @@ util.regex = util.regex || function() {
     //REGEX
 
     /**
-     *   span wird u.a. benötigt, um String verschiedene Attribute (attr) mitzugeben bspw. <p>My mother has <span style="color:blue">blue</span> eyes.</p>
+     *   span wird u.a. benötigt, um String verschiedene Attribute (attr) mitzugeben bspw. &lt;p>My mother has &lt;span style="color:blue">blue&lt;/span> eyes.&lt;/p>
      *   es wird also ein opening (var open) span tag gebildet mit den Attributen und ein closingtag (var close), der zu verwendene String (str) wird hier zwischen eingefügt
      *   Tags werden mit Methode addTagsToString angefügt
      *   Rückgabewert ist der veränderte string
@@ -47,8 +75,8 @@ util.regex = util.regex || function() {
      *   @return string - der bearbeitete String
      **/
     this.addSpanWithAttributesToString = function(str, attr) {
-        var open = "<span " + attr + ">";
-        var close = "</span>";
+        var open = "&lt;span " + attr + ">";
+        var close = "&lt;/span>";
 
         return this.addTagsToString(str, open, close);
     }
@@ -62,7 +90,7 @@ util.regex = util.regex || function() {
      *   @return {string} - Der bearbeitete String
      */
     this.replaceStringAtID = function(ID, replaceString, inString) {
-        var regexString = "<\/?span[^>]*id=" + ID + ">" + "(.|\n)*?<\/span>";
+        var regexString = "&lt;\/?span[^>]*id=" + ID + ">" + "(.|\n)*?&lt;\/span>";
 
         var regex = new RegExp(regexString, "i");
         inString = inString.replace(regex, replaceString);
@@ -74,7 +102,7 @@ util.regex = util.regex || function() {
         var str = resObject.resultString;
         var entr = resObject.results;
         if (entr.length != 0) {
-            for (var i = 0; i < entr.length; i++) {
+            for (var i = 0; i &lt; entr.length; i++) {
                 var cur = entr[i];
                 str = this.replaceStringAtID(cur.spanID, replaceString, str);
             }
@@ -109,7 +137,7 @@ util.regex = util.regex || function() {
 
             var currentID = 0;
 
-            for (var i = 0; i < inString.length;) {
+            for (var i = 0; i &lt; inString.length;) {
                 var curChar = inString.charAt(i).toLowerCase();
                 if (tagOpened) {
                     if (curChar == '>') {
@@ -118,17 +146,17 @@ util.regex = util.regex || function() {
 
                     i++;
                 } else {
-                    if (curChar == '<') {
+                    if (curChar == '&lt;') {
                         tagOpened = true;
                         i++;
                     } else {
                         var startIndex = i;
-                        for (var j = 0; j < forString.length; j++) {
+                        for (var j = 0; j &lt; forString.length; j++) {
                             if (curChar == forString.charAt(j).toLowerCase()) {
                                 if (j == forString.length - 1) {
                                     var idString = "searchRes" + currentID;
-                                    var open = "<span style='color:blue;background-color: yellow' id=" + idString + ">";
-                                    var close = "</span>";
+                                    var open = "&lt;span style='color:blue;background-color: yellow' id=" + idString + ">";
+                                    var close = "&lt;/span>";
 
                                     inString = [inString.slice(0, startIndex), open, inString.slice(startIndex)].join('');
                                     var endIndex = startIndex + open.length + forString.length;
@@ -323,7 +351,7 @@ util.regex = util.regex || function() {
      * @return {string} - der bearbeitete String
      */
     this.makeStringFat = function(str) {
-        return this.addTagsToString(str, "<b>", "</b>");
+        return this.addTagsToString(str, "&lt;b>", "&lt;/b>");
     }
 
     /*
@@ -332,7 +360,7 @@ util.regex = util.regex || function() {
      * @return {string} - der bearbeitete String
      */
     this.makeStringKursiv = function(str) {
-        return this.addTagsToString(str, "<i>", "</i>");
+        return this.addTagsToString(str, "&lt;i>", "&lt;/i>");
     }
 
     /*
@@ -342,19 +370,19 @@ util.regex = util.regex || function() {
      * @return {string} - der bearbeitete String
      */
     this.makeStringUnderlined = function(str) {
-        return this.addTagsToString(str, "<u>", "</u>");
+        return this.addTagsToString(str, "&lt;u>", "&lt;/u>");
     }
 
     /*
-     * Überprüfung ob string (str) bold ist, es wird eine Überprüfung auf die <b> Tags ausgeführt
+     * Überprüfung ob string (str) bold ist, es wird eine Überprüfung auf die &lt;b> Tags ausgeführt
      * @param{string} str - der zu überprüfende String
      * @return {bool} - bool ob String das Attribut aufweist oder nicht
      */
     this.stringIsFat = function(str) {
         var res = this.getTagsFromString(str);
         if (res.length !== 0) {
-            if (res[0] == "<b>") {
-                if (res[res.length - 1] == "</b>") {
+            if (res[0] == "&lt;b>") {
+                if (res[res.length - 1] == "&lt;/b>") {
                     return true;
                 }
             }
@@ -364,15 +392,15 @@ util.regex = util.regex || function() {
     }
 
     /*
-     * Überprüfung ob string (str) italic ist, es wird eine Überprüfung auf die <i> Tags ausgeführt
+     * Überprüfung ob string (str) italic ist, es wird eine Überprüfung auf die &lt;i> Tags ausgeführt
      * @param{string} str - der zu überprüfende String
      * @return {bool} - bool ob String das Attribut aufweist oder nicht
      */
     this.stringIsKursiv = function(str) {
         var res = this.getTagsFromString(str);
         if (res.length !== 0) {
-            if (res[0] == "<i>") {
-                if (res[res.length - 1] == "</i>") {
+            if (res[0] == "&lt;i>") {
+                if (res[res.length - 1] == "&lt;/i>") {
                     return true;
                 }
             }
@@ -383,15 +411,15 @@ util.regex = util.regex || function() {
     }
 
     /*
-     * Überprüfung ob string (str) underlined ist, es wird eine Überprüfung auf die <u> Tags ausgeführt
+     * Überprüfung ob string (str) underlined ist, es wird eine Überprüfung auf die &lt;u> Tags ausgeführt
      * @param{string} str - der zu überprüfende String
      * @return {bool} - bool ob String das Attribut aufweist oder nicht
      */
     this.stringIsUnderlined = function(str) {
         var res = this.getTagsFromString(str);
         if (res.length !== 0) {
-            if (res[0] == "<u>") {
-                if (res[res.length - 1] == "</u>") {
+            if (res[0] == "&lt;u>") {
+                if (res[res.length - 1] == "&lt;/u>") {
                     return true;
                 }
             }
@@ -429,36 +457,36 @@ util.regex = util.regex || function() {
      * @return {string} - der bearbeitete String
      */
     this.remvoeAllAttrFromString = function(str) {
-        str = str.replace(/<\/?[^>]*>/g, "");
+        str = str.replace(/&lt;\/?[^>]*>/g, "");
 
         return str;
     }
 
     /*
-     * bold (<b>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+     * bold (&lt;b>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
      * @param {string} str - der zu bearbeitende String
      * @return {string} - der bearbeitete String
      */
     this.removeFatAttrFromString = function(str) {
-        return this.removeTagsFromString(str, "<b>", "</b>");
+        return this.removeTagsFromString(str, "&lt;b>", "&lt;/b>");
     }
 
     /*
-     * italic (<i>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+     * italic (&lt;i>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
      * @param {string} str - der zu bearbeitende String
      * @return {string} - der bearbeitete String
      */
     this.removeKursivAttrFromString = function(str) {
-        return this.removeTagsFromString(str, "<i>", "</i>");
+        return this.removeTagsFromString(str, "&lt;i>", "&lt;/i>");
     }
 
     /*
-     * underlined (<u>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
+     * underlined (&lt;u>) Attribute werden vom string (str) entfernt, Rückgabewert ist der String ohne die entsprechenden Attribute
      * @param {string} str - der zu bearbeitende String
      * @return {string} - der bearbeitete String
      */
     this.removeUnderLinedFromString = function(str) {
-        return this.removeTagsFromString(str, "<u>", "</u>");
+        return this.removeTagsFromString(str, "&lt;u>", "&lt;/u>");
     }
 
     /**
@@ -476,7 +504,7 @@ util.regex = util.regex || function() {
      * @return {[{found:string, index:int}]} - die gefundenen Ergebnisse
      */
     this.getTagsFromString = function(str) {
-        var reg = new RegExp("<[^>]*>", "gi");
+        var reg = new RegExp("&lt;[^>]*>", "gi");
 
         return this.executeSearchRegex(str, reg);
     }
@@ -544,7 +572,7 @@ util.regex = util.regex || function() {
      * @return {string} - der bearbeitete String
      */
     this.removeSpanWithAttributes = function(str) {
-        str = str.replace(/<\/?span[^>]*>/g, "");
+        str = str.replace(/&lt;\/?span[^>]*>/g, "");
 
         return str;
     }
@@ -627,11 +655,11 @@ util.regex = util.regex || function() {
      */
     this.getRegexForSearchStringIgnoringTags = function(searchString, attributes) {
         var regString = "";
-        for (var i = 0; i < searchString.length; i++) {
+        for (var i = 0; i &lt; searchString.length; i++) {
             var curChar = searchString.charAt(i);
             regString += curChar;
-            if (i < searchString.length + 1) {
-                regString += "?[<[^>]*>]";
+            if (i &lt; searchString.length + 1) {
+                regString += "?[&lt;[^>]*>]";
             }
 
         }
@@ -655,3 +683,26 @@ util.regex = util.regex || function() {
         return [str.substring(0, index), str.substring(index)];
     }
 };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="core.anypad.html">anypad</a></li><li><a href="core.eventHandler.html">eventHandler</a></li><li><a href="core.htmlparser.html">htmlparser</a></li><li><a href="util.print.html">print</a></li><li><a href="util.storage.html">storage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#detectSelection">detectSelection</a></li><li><a href="global.html#getCaretCharacterOffsetWithin">getCaretCharacterOffsetWithin</a></li><li><a href="global.html#getHtmlparser">getHtmlparser</a></li><li><a href="global.html#getUserStorage">getUserStorage</a></li><li><a href="global.html#iFontSize">iFontSize</a></li><li><a href="global.html#iForeColor">iForeColor</a></li><li><a href="global.html#iImage">iImage</a></li><li><a href="global.html#iLink">iLink</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#openFile">openFile</a></li><li><a href="global.html#openPrintDialog">openPrintDialog</a></li><li><a href="global.html#repeatSearch">repeatSearch</a></li><li><a href="global.html#replaceAll">replaceAll</a></li><li><a href="global.html#saveFile">saveFile</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setCaretPosition">setCaretPosition</a></li><li><a href="global.html#simpleCommand">simpleCommand</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#writeDefault">writeDefault</a></li><li><a href="global.html#writeHTML">writeHTML</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Aug 22 2016 21:10:42 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

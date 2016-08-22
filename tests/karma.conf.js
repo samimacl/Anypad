@@ -14,11 +14,18 @@ module.exports = function (config) {
         files: [
           'specs/*!(.spec).js',
           'specs/**/*.spec.js',
-          {pattern: "../src/editor/**/*.js", included: false},
-          {pattern: "../src/*.html", included: false},
-          {pattern: "../src/editor/**/*.css", included: false},
-          '../src/index.html',
-          '../src/editor/**/**/*.js'
+          {pattern: "src/editor/**/*.js", included: false},
+          {pattern: "src/*.html", included: false},
+          {pattern: "src/editor/**/*.css", included: false},
+          'src/assets/lib/js/jquery.min.js',
+          'src/assets/lib/js/jquery.min.js',
+          'src/assets/lib/bootstrap/js/bootstrap.min.js',
+          'src/index.html',
+          'src/editor/core/anypad.js',
+          'src/editor/storage/storage.js',
+          'src/editor/storage/userstorage.js',
+          'src/editor/eventing/eventHandler.js',
+          'src/editor/**/*.js'
         ],
 
 

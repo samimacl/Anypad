@@ -29,58 +29,58 @@
             <pre class="prettyprint source linenums"><code>var util = util || {};
 
 /**
-* storage dient dazu den Inhalt des Editors zu sichern und wieder zu öffnen.
-* @class
-*	@constructor
-*/
+ * storage dient dazu den Inhalt des Editors zu sichern und wieder zu öffnen.
+ *  @class
+ *	@constructor
+ */
 util.storage = util.storage || function() {
 
-	/** Der Funktion wird HTML-Text übergeben.
-	*	Es erscheint ein Dialog, in dem der Nutzer den Namen der Datei und den Ort der Speicherung
-	*	auswählen kann. Der Inhalt wird als .json file inklusive Tags gesichert.
-	* @param {string} innerHTML - Das HTML, das für den Download übergeben wird
-	*/
-	this.exportJSON = function( innerHTML ) {
+    /** Der Funktion wird HTML-Text übergeben.
+     *	Es erscheint ein Dialog, in dem der Nutzer den Namen der Datei und den Ort der Speicherung
+     *	auswählen kann. Der Inhalt wird als .json file inklusive Tags gesichert.
+     * @param {string} innerHTML - Das HTML, das für den Download übergeben wird
+     */
+    this.exportJSON = function(innerHTML) {
 
-		var datei = innerHTML;
-		var dataStr ="data:text/json;charset=utf-8," + datei;
+        var datei = innerHTML;
+        var dataStr = "data:text/json;charset=utf-8," + datei;
 
-		 //download der datei
-		 var save = document.getElementById('dl');
-		 save.setAttribute("href",     dataStr     );
-		 save.setAttribute("download", "backup.json");
-		 save.click();
+        //download der datei
+        var save = document.getElementById('dl');
+        save.setAttribute("href", dataStr);
+        save.setAttribute("download", "backup.json");
+        save.click();
 
-	};
+    };
 
-	/** Die Funktion ermöglicht das Hochladen und Anzeigen einer .json oder .txt Datei
-	*	in der Anwendung. Die Datei wird per Dialog ausgewählt. Es wird entweder ein Fehler
-	*	zurückgegeben oder der Inhalt der ausgelesenen Datei wird direkt als Text in die
-	*	HTML-Seite geschrieben.
-	*/
-	this.importJSON = function() {
+    /** Die Funktion ermöglicht das Hochladen und Anzeigen einer .json oder .txt Datei
+     *	in der Anwendung. Die Datei wird per Dialog ausgewählt. Es wird entweder ein Fehler
+     *	zurückgegeben oder der Inhalt der ausgelesenen Datei wird direkt als Text in die
+     *	HTML-Seite geschrieben.
+     */
+    this.importJSON = function() {
 
-		var element = document.createElement('div');
-		element.innerHTML = '&lt;input type="file">';
-		var fileInput = element.firstChild;
+        var element = document.createElement('div');
+        element.innerHTML = '&lt;input type="file">';
+        var fileInput = element.firstChild;
 
-		fileInput.addEventListener('change', function() {
-	    var file = fileInput.files[0];
+        fileInput.addEventListener('change', function() {
+            var file = fileInput.files[0];
 
-	    if (file.name.match(/\.(txt|json)$/)) {
-	        var reader = new FileReader();
-	        reader.onload = function() {
-						var html = reader.result;
-						document.getElementById("richTextField").contentWindow.document.body.innerHTML = html;
-	        };
-	        reader.readAsText(file);
-	    } else {
-	        alert("File not supported, .txt or .json files only");
-	    }
-		});
+            if (file.name.match(/\.(txt|json)$/)) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var html = reader.result;
+                    document.getElementById("richTextField").contentWindow.document.body.innerHTML = html;
+                };
+                reader.readAsText(file);
+            } else {
+                alert("File not supported, .txt or .json files only");
+            }
+        });
 
-		fileInput.click();
-	};
+        fileInput.click();
+    };
 };
 </code></pre>
         </article>
@@ -92,13 +92,13 @@ util.storage = util.storage || function() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="core.anypad.html">anypad</a></li><li><a href="core.eventHandler.html">eventHandler</a></li><li><a href="core.htmlparser.html">htmlparser</a></li><li><a href="util.print.html">print</a></li><li><a href="util.storage.html">storage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#detectSelection">detectSelection</a></li><li><a href="global.html#getHtmlparser">getHtmlparser</a></li><li><a href="global.html#getUserStorage">getUserStorage</a></li><li><a href="global.html#iFontSize">iFontSize</a></li><li><a href="global.html#iForeColor">iForeColor</a></li><li><a href="global.html#iImage">iImage</a></li><li><a href="global.html#iLink">iLink</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#openFile">openFile</a></li><li><a href="global.html#openPrintDialog">openPrintDialog</a></li><li><a href="global.html#saveFile">saveFile</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#simpleCommand">simpleCommand</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#writeDefault">writeDefault</a></li><li><a href="global.html#writeHTML">writeHTML</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="core.anypad.html">anypad</a></li><li><a href="core.eventHandler.html">eventHandler</a></li><li><a href="core.htmlparser.html">htmlparser</a></li><li><a href="util.print.html">print</a></li><li><a href="util.storage.html">storage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#detectSelection">detectSelection</a></li><li><a href="global.html#getCaretCharacterOffsetWithin">getCaretCharacterOffsetWithin</a></li><li><a href="global.html#getHtmlparser">getHtmlparser</a></li><li><a href="global.html#getUserStorage">getUserStorage</a></li><li><a href="global.html#iFontSize">iFontSize</a></li><li><a href="global.html#iForeColor">iForeColor</a></li><li><a href="global.html#iImage">iImage</a></li><li><a href="global.html#iLink">iLink</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#openFile">openFile</a></li><li><a href="global.html#openPrintDialog">openPrintDialog</a></li><li><a href="global.html#repeatSearch">repeatSearch</a></li><li><a href="global.html#replaceAll">replaceAll</a></li><li><a href="global.html#saveFile">saveFile</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setCaretPosition">setCaretPosition</a></li><li><a href="global.html#simpleCommand">simpleCommand</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#writeDefault">writeDefault</a></li><li><a href="global.html#writeHTML">writeHTML</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Aug 06 2016 16:05:42 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Aug 22 2016 21:10:42 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>
