@@ -40,6 +40,7 @@ and open the template in the editor.
 #search{
 	float:left;
         padding-left: 0px;
+        margin-top: 9px;
 }
 #dl{
     display: none;
