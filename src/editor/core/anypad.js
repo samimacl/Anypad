@@ -220,6 +220,7 @@ core = core || {};
             if (currentSearch != null) {
                 var output = regex.replaceAllIdsInString(replaceString, currentSearch);
                 self.writeHTML(output, false);
+                htmlparser.update();
                 this.repeatSearch();
                 $("#replace_input").val("");
             }
